@@ -16,7 +16,7 @@ public class MainArray {
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Resume r;
+        Resume index;
         while (true) {
             System.out.print("Введите одну из команд - (list | save uuid | delete uuid | get uuid | update uuid | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
@@ -36,8 +36,8 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    r = new Resume(uuid);
-                    ARRAY_STORAGE.save(r);
+                    index = new Resume(uuid);
+                    ARRAY_STORAGE.save(index);
                     printAll();
                     break;
                 case "delete":
@@ -52,7 +52,8 @@ public class MainArray {
                     printAll();
                     break;
                 case "update":
-                    ARRAY_STORAGE.update(uuid);
+                    index = new Resume(uuid);
+                    ARRAY_STORAGE.update(index);
                     break;
                 case "exit":
                     return;

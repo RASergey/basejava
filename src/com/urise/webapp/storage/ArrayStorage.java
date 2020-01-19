@@ -8,24 +8,32 @@ import java.util.Arrays;
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    private Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10_000];
     private int size = 0;
 
     public void clear() {
-        size = 0;
         Arrays.fill(storage, 0, size, null);
+        size = 0;
     }
 
-    public void update(String uuid) {
-        isNotContains(uuid);
-    }
-
-    public void save(Resume r) {
-        if (isContains(r) && r.toString() != null) {
-            storage[size] = r;
-            size++;
+    public void update(Resume index) {
+        if (checkIndex(index.toString()) < 0) {
+            System.out.println("\nERROR " + index + " uuid doesn't exist\n");
         } else {
-            System.out.println("ERROR");
+            storage[checkIndex(index.toString())] = index;
+        }
+    }
+
+    public void save(Resume index) {
+        if (index == null) {
+            System.out.println("\nERROR incorrect uuid input\n");
+        } else {
+            if (checkIndex(index.toString()) > 0 || size > storage.length - 1) {
+                System.out.println("\nERROR this " + index + " uuid already exist or the uuid limit is too high\n");
+            } else {
+                storage[size] = index;
+                size++;
+            }
         }
     }
 
@@ -39,13 +47,13 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        if (isNotContains(uuid)) {
-            for (int i = 0; i < size; i++) {
-                if (storage[i].getUuid().equals(uuid)) {
-                    System.arraycopy(storage, i + 1, storage, i, size - 1 - i);
-                    storage[size - 1] = null;
-                    size--;
-                }
+        if (checkIndex(uuid) < 0) {
+            System.out.println("\nERROR " + uuid + " uuid doesn't exist\n");
+        } else {
+            if (storage[checkIndex(uuid)].getUuid().equals(uuid)) {
+                System.arraycopy(storage, size - 1, storage, checkIndex(uuid), 1);
+                storage[size - 1] = null;
+                size--;
             }
         }
     }
@@ -61,25 +69,12 @@ public class ArrayStorage {
         return size;
     }
 
-    private boolean isContains(Resume r) {
+    private int checkIndex(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(r.toString())) {
-                System.out.println("ERROR");
-                return false;
+            if (storage[i].getUuid().equals(uuid)) {
+                return i;
             }
         }
-        return true;
-    }
-
-    private boolean isNotContains(String uuid) {
-        for (int i = 0; i < size; i++) {
-            for (int j = i; j < size; j++) {
-                if (storage[i].getUuid().equals(uuid)) {
-                    return true;
-                }
-            }
-        }
-        System.out.println("ERROR");
-        return false;
+        return -1;
     }
 }

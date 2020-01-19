@@ -17,10 +17,11 @@ public class ArrayStorage {
     }
 
     public void update(Resume index) {
-        if (checkIndex(index.toString()) < 0) {
+        int indexCheck = checkingIndex(index.toString());
+        if (indexCheck < 0) {
             System.out.println("\nERROR " + index + " uuid doesn't exist\n");
         } else {
-            storage[checkIndex(index.toString())] = index;
+            storage[indexCheck] = index;
         }
     }
 
@@ -28,7 +29,7 @@ public class ArrayStorage {
         if (index == null) {
             System.out.println("\nERROR incorrect uuid input\n");
         } else {
-            if (checkIndex(index.toString()) > 0 || size > storage.length - 1) {
+            if (checkingIndex(index.toString()) > 0 || size > storage.length - 1) {
                 System.out.println("\nERROR this " + index + " uuid already exist or the uuid limit is too high\n");
             } else {
                 storage[size] = index;
@@ -47,11 +48,12 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        if (checkIndex(uuid) < 0) {
+        int indexCheck = checkingIndex(uuid);
+        if (indexCheck < 0) {
             System.out.println("\nERROR " + uuid + " uuid doesn't exist\n");
         } else {
-            if (storage[checkIndex(uuid)].getUuid().equals(uuid)) {
-                System.arraycopy(storage, size - 1, storage, checkIndex(uuid), 1);
+            if (storage[indexCheck].getUuid().equals(uuid)) {
+                System.arraycopy(storage, size - 1, storage, indexCheck, 1);
                 storage[size - 1] = null;
                 size--;
             }
@@ -69,7 +71,7 @@ public class ArrayStorage {
         return size;
     }
 
-    private int checkIndex(String uuid) {
+    private int checkingIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;

@@ -16,47 +16,49 @@ public class ArrayStorage {
         size = 0;
     }
 
-    public void update(Resume index) {
-        int indexCheck = checkingIndex(index.toString());
-        if (indexCheck < 0) {
-            System.out.println("\nERROR " + index + " uuid doesn't exist\n");
+    public void update(Resume resume) {
+        int index = getIndex(resume.getUuid());
+        if (index >= 0) {
+            storage[index] = resume;
         } else {
-            storage[indexCheck] = index;
+            System.out.println("\nERROR " + resume + " uuid not found\n");
         }
     }
 
-    public void save(Resume index) {
-        if (index == null) {
+    public void save(Resume resume) {
+        if (resume == null) {
             System.out.println("\nERROR incorrect uuid input\n");
         } else {
-            if (checkingIndex(index.toString()) > 0 || size > storage.length - 1) {
-                System.out.println("\nERROR this " + index + " uuid already exist or the uuid limit is too high\n");
+            if (size >= storage.length) {
+                System.out.println("\nERROR resume limit exceeded\n");
             } else {
-                storage[size] = index;
-                size++;
+                if (getIndex(resume.getUuid()) >= 0) {
+                    System.out.println("\nERROR this " + resume + " uuid already exist\n");
+                } else {
+                    storage[size] = resume;
+                    size++;
+                }
             }
         }
     }
 
     public Resume get(String uuid) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i].getUuid().equals(uuid)) {
-                return storage[i];
-            }
+        int index = getIndex(uuid);
+        if (index < 0) {
+            System.out.println("\nERROR " + uuid + " resume not found");
+            return null;
         }
-        return null;
+        return storage[index];
     }
 
     public void delete(String uuid) {
-        int indexCheck = checkingIndex(uuid);
-        if (indexCheck < 0) {
-            System.out.println("\nERROR " + uuid + " uuid doesn't exist\n");
+        int index = getIndex(uuid);
+        if (index >= 0) {
+            storage[index] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
         } else {
-            if (storage[indexCheck].getUuid().equals(uuid)) {
-                System.arraycopy(storage, size - 1, storage, indexCheck, 1);
-                storage[size - 1] = null;
-                size--;
-            }
+            System.out.println("\nERROR " + uuid + " resume not found\n");
         }
     }
 
@@ -71,7 +73,7 @@ public class ArrayStorage {
         return size;
     }
 
-    private int checkingIndex(String uuid) {
+    private int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;

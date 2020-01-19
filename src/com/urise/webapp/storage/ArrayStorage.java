@@ -18,10 +18,10 @@ public class ArrayStorage {
 
     public void update(Resume resume) {
         int index = getIndex(resume.getUuid());
-        if (index >= 0) {
-            storage[index] = resume;
-        } else {
+        if (index < 0) {
             System.out.println("\nERROR " + resume + " uuid not found\n");
+        } else {
+            storage[index] = resume;
         }
     }
 
@@ -53,12 +53,12 @@ public class ArrayStorage {
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
-        if (index >= 0) {
+        if (index < 0) {
+            System.out.println("\nERROR " + uuid + " resume not found\n");
+        } else {
             storage[index] = storage[size - 1];
             storage[size - 1] = null;
             size--;
-        } else {
-            System.out.println("\nERROR " + uuid + " resume not found\n");
         }
     }
 

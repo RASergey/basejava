@@ -44,6 +44,7 @@ public class MainArray {
                 case "update":
                     resume = new Resume(uuid);
                     ARRAY_STORAGE.update(resume);
+                    printAll();
                     break;
                 case "delete":
                     ARRAY_STORAGE.delete(uuid);

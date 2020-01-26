@@ -38,7 +38,7 @@ public class MainArray {
                     break;
                 case "save":
                     resume = new Resume(uuid);
-                    ARRAY_STORAGE.save(resume);
+                    ARRAY_STORAGE.templateSave(resume);
                     printAll();
                     break;
                 case "update":
@@ -47,7 +47,7 @@ public class MainArray {
                     printAll();
                     break;
                 case "delete":
-                    ARRAY_STORAGE.delete(uuid);
+                    ARRAY_STORAGE.templateDelete(uuid);
                     printAll();
                     break;
                 case "get":

@@ -11,11 +11,11 @@ public interface Storage {
 
     void update(Resume resume);
 
-    void save(Resume resume);
+    void templateSave(Resume resume);
 
     Resume get(String uuid);
 
-    void delete(String uuid);
+    void templateDelete(String uuid);
 
     Resume[] getAll();
 

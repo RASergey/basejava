@@ -11,10 +11,6 @@ public class ArrayStorage extends AbstractArrayStorage {
         storage[size] = resume;
     }
 
-    protected void templateDelete(String uuid) {
-        storage[getIndex(uuid)] = storage[size - 1];
-    }
-
     protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (uuid.equals(storage[i].getUuid())) {

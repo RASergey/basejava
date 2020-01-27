@@ -5,28 +5,21 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
-    protected int index = 0;
 
     @Override
-    public void save(Resume resume) {
-        index = ~getIndex(resume.getUuid());
-        size++;
-        if (index != size - 1) {
-            for (int i = 0; i < size - index; i++) {
-                storage[size - i] = storage[size - i - 1];
-            }
+    protected void templateSave(int index, Resume resume) {
+        if (index != size) {
+            System.arraycopy(storage, index,storage, index + 1, size - index);
         }
         storage[index] = resume;
     }
 
     @Override
-    public void delete(String uuid) {
-        index = getIndex(uuid);
+    protected void templateDelete(String uuid) {
+        int index = getIndex(uuid);
         if (size - 1 - index >= 0) {
             System.arraycopy(storage, index + 1, storage, index, size - 1 - index);
         }
-        storage[size - 1] = null;
-        size--;
     }
 
     @Override

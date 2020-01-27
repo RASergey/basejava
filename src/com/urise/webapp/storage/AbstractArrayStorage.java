@@ -24,19 +24,19 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    public void templateSave(Resume resume) {
+    public void save(Resume resume) {
         if (resume.getUuid() == null) {
             System.out.println("\nERROR incorrect uuid input\n");
-        } else if (size > STORAGE_LIMIT - 1) {
+        } else if (size >= STORAGE_LIMIT) {
             System.out.println("\nERROR resume limit exceeded\n");
         } else if (getIndex(resume.getUuid()) >= 0) {
             System.out.println("\nERROR this " + resume + " uuid already exist\n");
         } else {
-            save(resume);
+            int index = ~getIndex(resume.getUuid());
+            templateSave(index ,resume);
+            size++;
         }
     }
-
-    public abstract void save(Resume resume);
 
     public int size() {
         return size;
@@ -51,20 +51,24 @@ public abstract class AbstractArrayStorage implements Storage {
         return storage[index];
     }
 
-    public void templateDelete(String uuid) {
+    public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index < 0) {
             System.out.println("\nERROR " + uuid + " resume not found\n");
         } else {
-            delete(uuid);
+            templateDelete(uuid);
+            storage[size - 1] = null;
+            size--;
         }
     }
-
-    public abstract void delete(String uuid);
 
     public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
+
+    protected abstract void templateSave(int index, Resume resume);
+
+    protected abstract void templateDelete(String uuid);
 
     protected abstract int getIndex(String uuid);
 }

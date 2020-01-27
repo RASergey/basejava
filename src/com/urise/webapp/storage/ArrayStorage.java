@@ -7,15 +7,12 @@ import com.urise.webapp.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    public void save(Resume resume) {
+    protected void templateSave(int index, Resume resume) {
         storage[size] = resume;
-        size++;
     }
 
-    public void delete(String uuid) {
+    protected void templateDelete(String uuid) {
         storage[getIndex(uuid)] = storage[size - 1];
-        storage[size - 1] = null;
-        size--;
     }
 
     protected int getIndex(String uuid) {

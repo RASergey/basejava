@@ -7,7 +7,12 @@ import com.urise.webapp.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    protected void templateSave(int index, Resume resume) {
+    @Override
+    protected void fillDeletedElement(int index) {
+        storage[index] = storage[size - 1];
+    }
+
+    protected void insertElement(int index, Resume resume) {
         storage[size] = resume;
     }
 

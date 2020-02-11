@@ -45,10 +45,9 @@ public class AbstractArrayStorageTest {
         storage.update(new Resume("dummy"));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void getAll() {
-        storage.save(new Resume(null));
-        storage.getAll();
+        Assert.assertEquals(3, storage.size());;
     }
 
     @Test(expected = ExistStorageException.class)

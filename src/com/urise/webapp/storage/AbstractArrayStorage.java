@@ -38,7 +38,7 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
         if (resume.getUuid() == null) {
-            throw new StorageException("ERROR incorrect uuid input", resume.getUuid());
+            throw new NullPointerException("NullPointerException");
         } else if (index >= 0) {
             throw new ExistStorageException(resume.getUuid());
         } else if (size >= STORAGE_LIMIT) {

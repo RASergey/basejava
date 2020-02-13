@@ -19,6 +19,7 @@ public abstract class AbstractArrayStorageTest {
     private static final Resume RESUME_1 = new Resume(UUID_1);
     private static final Resume RESUME_2 = new Resume(UUID_2);
     private static final Resume RESUME_3 = new Resume(UUID_3);
+    private static final Resume RESUME_4 = new Resume(UUID_3);
     private static final int STORAGE_LIMIT = 10_000;
 
     protected AbstractArrayStorageTest(Storage storage) {
@@ -46,8 +47,8 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void update() {
-        storage.update(RESUME_3);
-        assertEquals(RESUME_3, storage.get(UUID_3));
+        storage.update(RESUME_4);
+        assertSame(storage.get(UUID_3), RESUME_4);
     }
 
     @Test(expected = NotExistStorageException.class)
@@ -59,7 +60,7 @@ public abstract class AbstractArrayStorageTest {
     public void getAll() {
         Resume[] resumes = new Resume[]{RESUME_1, RESUME_2, RESUME_3};
         assertArrayEquals(resumes, storage.getAll());
-        assertEquals(resumes.length, storage.size());
+        assertEquals(storage.size(), resumes.length);
     }
 
     @Test
@@ -86,8 +87,8 @@ public abstract class AbstractArrayStorageTest {
             for (int i = 0; i < STORAGE_LIMIT; i++) {
                 storage.save(new Resume());
             }
-        } catch (Exception e) {
-            fail("Premature overflow");
+        } catch (StorageException exception) {
+            fail(exception.getMessage());
         }
         storage.save(new Resume());
     }

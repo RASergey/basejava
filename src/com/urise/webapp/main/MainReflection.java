@@ -17,6 +17,6 @@ public class MainReflection {
         field.setAccessible(false);
         System.out.println(field.getName() + " : " + resume);
         Method method = resume.getClass().getDeclaredMethod("toString");
-        System.out.println(method.invoke(resume, (Object[]) null));
+        System.out.println(method.invoke(resume));
     }
 }

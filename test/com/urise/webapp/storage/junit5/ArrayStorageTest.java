@@ -1,8 +1,8 @@
-package com.urise.webapp.storage.junit4;
+package com.urise.webapp.storage.junit5;
 
 import com.urise.webapp.storage.ArrayStorage;
 
-public class ArrayStorageTest extends AbstractArrayStorageTest {
+class ArrayStorageTest extends AbstractArrayStorageTest {
 
     public ArrayStorageTest() {
         super(new ArrayStorage());

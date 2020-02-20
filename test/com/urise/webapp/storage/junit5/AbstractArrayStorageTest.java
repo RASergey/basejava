@@ -5,7 +5,10 @@ import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.storage.Storage;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,25 +85,25 @@ abstract class AbstractArrayStorageTest {
 
     @Nested
     class NotExistTest {
-        @AfterEach
-        void setEnd() {
-            NotExistStorageException exception = assertThrows(NotExistStorageException.class, () -> storage.update(RESUME_DUMMY));
-            assertEquals(exception.getMessage(), "Resume dummy not exist");
-        }
 
         @Test
         void updateNotExist() {
-            assertThrows(NotExistStorageException.class, () -> storage.update(RESUME_DUMMY));
+            doNotExist(() -> storage.update(RESUME_DUMMY));
         }
 
         @Test
         public void deleteNotExist() {
-            assertThrows(NotExistStorageException.class, () -> storage.delete(DUMMY));
+            doNotExist(() -> storage.delete(DUMMY));
         }
 
         @Test
         public void getNotExist() {
-            assertThrows(NotExistStorageException.class, () -> storage.get(DUMMY));
+            doNotExist(() -> storage.get(DUMMY));
+        }
+
+        private void doNotExist(Executable executable) {
+            NotExistStorageException exception = assertThrows(NotExistStorageException.class, executable);
+            assertEquals(exception.getMessage(), "Resume dummy not exist");
         }
     }
 

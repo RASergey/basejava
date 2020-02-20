@@ -82,6 +82,12 @@ abstract class AbstractArrayStorageTest {
 
     @Nested
     class NotExistTest {
+        @AfterEach
+        void setEnd() {
+            NotExistStorageException exception = assertThrows(NotExistStorageException.class, () -> storage.update(RESUME_DUMMY));
+            assertEquals(exception.getMessage(), "Resume dummy not exist");
+        }
+
         @Test
         void updateNotExist() {
             assertThrows(NotExistStorageException.class, () -> storage.update(RESUME_DUMMY));

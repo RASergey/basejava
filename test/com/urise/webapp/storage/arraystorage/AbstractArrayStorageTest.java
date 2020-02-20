@@ -1,4 +1,4 @@
-package com.urise.webapp.storage.junit4;
+package com.urise.webapp.storage.arraystorage;
 
 import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;

@@ -1,0 +1,15 @@
+package com.urise.webapp.storage;
+
+import com.urise.webapp.storage.arraystorage.ArrayStorageTest;
+import com.urise.webapp.storage.arraystorage.SortedArrayStorageTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        ArrayStorageTest.class,
+        SortedArrayStorageTest.class,
+        ListStorageTest.class
+})
+public class AllStorageTest {
+}

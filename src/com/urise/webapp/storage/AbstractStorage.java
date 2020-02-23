@@ -7,38 +7,39 @@ import com.urise.webapp.model.Resume;
 public abstract class AbstractStorage implements Storage {
 
     public void update(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        checkNotExist(resume.getUuid(), index);
-        updateResume(resume, index);
+        updateResume(resume, checkNotExist(resume.getUuid()));
     }
 
     public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
         if (resume.getUuid() == null) {
             throw new NullPointerException("NullPointerException");
-        } else if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        } else {
-            saveResume(resume, index);
         }
+        saveResume(resume, checkExist(resume.getUuid()));
     }
 
     public void delete(String uuid) {
-        int index = getIndex(uuid);
-        checkNotExist(uuid, index);
-        deleteResume(index);
+        deleteResume(checkNotExist(uuid));
     }
 
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        checkNotExist(uuid, index);
-        return getResume(index);
+        return getResume(checkNotExist(uuid));
     }
 
-    private void checkNotExist(String uuid, int index) {
+    private int checkNotExist(String uuid) {
+        int index = getIndex(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);
+        } else {
+            return index;
         }
+    }
+
+    private int checkExist(String uuid) {
+        int index = getIndex(uuid);
+        if (index >= 0) {
+            throw new ExistStorageException(uuid);
+        }
+        return index;
     }
 
     protected abstract void updateResume(Resume resume, int index);

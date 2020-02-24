@@ -11,9 +11,6 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void save(Resume resume) {
-        if (resume.getUuid() == null) {
-            throw new NullPointerException("NullPointerException");
-        }
         saveResume(resume, checkExist(resume.getUuid()));
     }
 
@@ -50,5 +47,5 @@ public abstract class AbstractStorage implements Storage {
 
     protected abstract Resume getResume(int index);
 
-    protected abstract int getIndex(String uuid);
+    protected abstract Integer getIndex(String uuid);
 }

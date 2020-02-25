@@ -41,14 +41,11 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected Integer getIndex(String uuid) {
-        if (uuid == null) {
-            return null;
-        }
         for (int i = 0; i < storage.size(); i++) {
             if (storage.get(i).getUuid().equals(uuid)) {
                 return i;
             }
         }
-        return -1;
+        return null;
     }
 }

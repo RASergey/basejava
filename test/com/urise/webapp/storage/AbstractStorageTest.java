@@ -73,11 +73,6 @@ public abstract class AbstractStorageTest {
         storage.save(RESUME_2);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void saveNull() {
-        storage.save(new Resume(null));
-    }
-
     @Test(expected = NotExistStorageException.class)
     public void delete() {
         storage.delete(UUID_3);

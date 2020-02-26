@@ -42,9 +42,8 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected Integer getIndex(String uuid) {
-        Resume searchKey = new Resume(uuid);
         for (int i = 0; i < storage.size(); i++) {
-            if (storage.get(i).equals(searchKey)) {
+            if (storage.get(i).getUuid().equals(uuid)) {
                 return i;
             }
         }

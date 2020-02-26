@@ -2,11 +2,11 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MapStorage extends AbstractStorage {
-    private Map<Integer, Resume> storage = new HashMap<>();
+    private Map<String, Resume> storage = new LinkedHashMap<>();
 
     public int size() {
         return storage.size();
@@ -22,29 +22,29 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected void updateResume(Resume resume, int index) {
-        storage.put(index, resume);
+        storage.put(resume.getUuid(), resume);
     }
 
     @Override
     protected void saveResume(Resume resume, int index) {
-        storage.put(index, resume);
+        storage.put(resume.getUuid(), resume);
     }
 
     @Override
-    protected void deleteResume(int index) {
-        storage.remove(index);
+    protected void deleteResume(String uuid, int index) {
+        storage.remove(uuid);
     }
 
     @Override
-    protected Resume getResume(int index) {
-        return storage.get(index);
+    protected Resume getResume(String uuid, int index) {
+        return storage.get(uuid);
     }
 
     @Override
     protected Integer getIndex(String uuid) {
-        for (int i = 0; i < storage.size(); i++) {
-            if (storage.get(i).getUuid().equals(uuid)) {
-                return i;
+        for (Map.Entry<String, Resume> resume : storage.entrySet()) {
+            if (resume.getKey().equals(uuid)) {
+                return storage.get(uuid).hashCode();
             }
         }
         return null;

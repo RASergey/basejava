@@ -23,10 +23,10 @@ public abstract class AbstractStorage implements Storage {
     }
 
     private int checkNotExist(String uuid) {
-        if (getIndex(uuid) == null) {
+        Integer index = getIndex(uuid);
+        if (index == null) {
             throw new NotExistStorageException(uuid);
         }
-        Integer index = getIndex(uuid);
         if (index < 0) {
             throw new NotExistStorageException(uuid);
         } else {
@@ -36,7 +36,7 @@ public abstract class AbstractStorage implements Storage {
 
     private int checkExist(String uuid) {
         Integer index = getIndex(uuid);
-        if (getIndex(uuid) == null) {
+        if (index == null) {
             return size();
         }
         if (index >= 0) {

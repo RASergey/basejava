@@ -1,4 +1,4 @@
-package com.urise.webapp.storage.junit5;
+package com.urise.webapp.storage.array;
 
 import com.urise.webapp.storage.SortedArrayStorage;
 

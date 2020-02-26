@@ -111,10 +111,5 @@ public abstract class AbstractStorageTest {
         public void saveExist() {
             assertThrows(ExistStorageException.class, () -> storage.save(new Resume(UUID_2)));
         }
-
-        @Test
-        public void saveNull() {
-            assertThrows(NullPointerException.class, () -> storage.save(new Resume(null)));
-        }
     }
 }

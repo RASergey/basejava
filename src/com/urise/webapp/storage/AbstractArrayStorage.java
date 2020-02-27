@@ -53,6 +53,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         return storage[index];
     }
 
+    @Override
+    protected boolean checkGetIndex(Integer index) {
+        return index >= 0;
+    }
+
     protected abstract void fillDeletedElement(int index);
 
     protected abstract void insertElement(Resume resume, int index);

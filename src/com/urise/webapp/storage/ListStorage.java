@@ -48,4 +48,9 @@ public class ListStorage extends AbstractStorage {
         }
         return null;
     }
+
+    @Override
+    protected boolean checkGetIndex(Integer index) {
+        return index != null;
+    }
 }

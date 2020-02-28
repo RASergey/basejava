@@ -2,11 +2,12 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MapStorage extends AbstractStorage {
-    private Map<String, Resume> storage = new LinkedHashMap<>();
+    private Map<Object, Resume> storage = new HashMap<>();
 
     public int size() {
         return storage.size();
@@ -17,40 +18,36 @@ public class MapStorage extends AbstractStorage {
     }
 
     public Resume[] getAll() {
-        return storage.values().toArray(Resume[]::new);
+        Map<Object, Resume> sortedStorage = new TreeMap<>(storage);
+        return sortedStorage.values().toArray(Resume[]::new);
     }
 
     @Override
-    protected void updateResume(Resume resume, int index) {
-        storage.put(resume.getUuid(), resume);
+    protected void updateResume(Resume resume, Object index) {
+        storage.put(index, resume);
     }
 
     @Override
-    protected void saveResume(Resume resume, int index) {
-        storage.put(resume.getUuid(), resume);
+    protected void saveResume(Resume resume, Object index) {
+        storage.put(index, resume);
     }
 
     @Override
-    protected void deleteResume(String uuid, int index) {
-        storage.remove(uuid);
+    protected void deleteResume(Object index) {
+        storage.remove(index);
     }
 
     @Override
-    protected Resume getResume(String uuid, int index) {
-        return storage.get(uuid);
+    protected Resume getResume(Object index) {
+        return storage.get(index);
     }
 
-    protected Integer getIndex(String uuid) {
-        for (String key : storage.keySet()) {
-            if (key.equals(uuid)) {
-                return key.hashCode();
-            }
-        }
-        return null;
+    protected String getIndex(String uuid) {
+        return uuid;
     }
 
     @Override
-    protected boolean checkGetIndex(Integer index) {
-        return index != null;
+    protected boolean checkGetIndex(Object uuid) {
+        return storage.containsKey(uuid);
     }
 }

@@ -15,15 +15,15 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void delete(String uuid) {
-        deleteResume(uuid, checkNotExist(uuid));
+        deleteResume(checkNotExist(uuid));
     }
 
     public Resume get(String uuid) {
-        return getResume(uuid, checkNotExist(uuid));
+        return getResume(checkNotExist(uuid));
     }
 
-    private int checkNotExist(String uuid) {
-        Integer index = getIndex(uuid);
+    private Object checkNotExist(String uuid) {
+        Object index = getIndex(uuid);
         if (!checkGetIndex(index)) {
             throw new NotExistStorageException(uuid);
         } else {
@@ -31,8 +31,8 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    private int checkExist(String uuid) {
-        Integer index = getIndex(uuid);
+    private Object checkExist(String uuid) {
+        Object index = getIndex(uuid);
         if (index == null) {
             return size();
         } else if (checkGetIndex(index)) {
@@ -42,15 +42,15 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    protected abstract void updateResume(Resume resume, int index);
+    protected abstract void updateResume(Resume resume, Object index);
 
-    protected abstract void saveResume(Resume resume, int index);
+    protected abstract void saveResume(Resume resume, Object index);
 
-    protected abstract void deleteResume(String uuid, int index);
+    protected abstract void deleteResume(Object index);
 
-    protected abstract Resume getResume(String uuid, int index);
+    protected abstract Resume getResume(Object index);
 
-    protected abstract Integer getIndex(String uuid);
+    protected abstract Object getIndex(String uuid);
 
-    protected abstract boolean checkGetIndex(Integer index);
+    protected abstract boolean checkGetIndex(Object index);
 }

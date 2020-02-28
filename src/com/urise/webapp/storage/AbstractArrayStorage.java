@@ -26,7 +26,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     protected void updateResume(Resume resume, Object index) {
-        storage[(int) index] = resume;
+        storage[(Integer) index] = resume;
     }
 
     @Override
@@ -34,15 +34,15 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         if (size >= STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", resume.getUuid());
         } else {
-            insertElement(resume, (int) index);
+            insertElement(resume, (Integer) index);
             size++;
         }
     }
 
     @Override
     protected void deleteResume(Object index) {
-        if (size - 1 > (int) index) {
-            fillDeletedElement((int) index);
+        if (size - 1 > (Integer) index) {
+            fillDeletedElement((Integer) index);
         }
         storage[size - 1] = null;
         size--;
@@ -50,12 +50,12 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
 
     @Override
     protected Resume getResume(Object index) {
-        return storage[(int) index];
+        return storage[(Integer) index];
     }
 
     @Override
-    protected boolean checkGetIndex(Object index) {
-        return (int) index >= 0;
+    protected boolean checkGetKey(Object index) {
+        return (Integer) index >= 0;
     }
 
     protected abstract void fillDeletedElement(int index);

@@ -1,4 +1,4 @@
-package com.urise.webapp.storage.array;
+package com.urise.webapp.storage.JUnit5;
 
 import com.urise.webapp.storage.ArrayStorage;
 

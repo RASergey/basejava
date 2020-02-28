@@ -1,8 +1,7 @@
-package com.urise.webapp.storage.array;
+package com.urise.webapp.storage.JUnit5;
 
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.AbstractStorageTest;
 import com.urise.webapp.storage.Storage;
 import org.junit.jupiter.api.Test;
 

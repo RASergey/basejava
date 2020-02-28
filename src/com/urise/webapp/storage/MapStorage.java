@@ -4,10 +4,9 @@ import com.urise.webapp.model.Resume;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class MapStorage extends AbstractStorage {
-    private Map<Object, Resume> storage = new HashMap<>();
+    private Map<String, Resume> storage = new HashMap<>();
 
     public int size() {
         return storage.size();
@@ -18,28 +17,27 @@ public class MapStorage extends AbstractStorage {
     }
 
     public Resume[] getAll() {
-        Map<Object, Resume> sortedStorage = new TreeMap<>(storage);
-        return sortedStorage.values().toArray(Resume[]::new);
+        return storage.values().toArray(Resume[]::new);
     }
 
     @Override
-    protected void updateResume(Resume resume, Object index) {
-        storage.put(index, resume);
+    protected void updateResume(Resume resume, Object key) {
+        storage.put((String) key, resume);
     }
 
     @Override
-    protected void saveResume(Resume resume, Object index) {
-        storage.put(index, resume);
+    protected void saveResume(Resume resume, Object key) {
+        storage.put((String) key, resume);
     }
 
     @Override
-    protected void deleteResume(Object index) {
-        storage.remove(index);
+    protected void deleteResume(Object key) {
+        storage.remove(String.valueOf(key));
     }
 
     @Override
-    protected Resume getResume(Object index) {
-        return storage.get(index);
+    protected Resume getResume(Object key) {
+        return storage.get(String.valueOf(key));
     }
 
     protected String getIndex(String uuid) {
@@ -47,7 +45,7 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean checkGetIndex(Object uuid) {
-        return storage.containsKey(uuid);
+    protected boolean checkGetKey(Object key) {
+        return storage.containsKey(String.valueOf(key));
     }
 }

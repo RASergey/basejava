@@ -23,34 +23,32 @@ public abstract class AbstractStorage implements Storage {
     }
 
     private Object checkNotExist(String uuid) {
-        Object index = getIndex(uuid);
-        if (!checkGetIndex(index)) {
+        Object key = getIndex(uuid);
+        if (!checkGetKey(key)) {
             throw new NotExistStorageException(uuid);
         } else {
-            return index;
+            return key;
         }
     }
 
     private Object checkExist(String uuid) {
-        Object index = getIndex(uuid);
-        if (index == null) {
-            return size();
-        } else if (checkGetIndex(index)) {
+        Object key = getIndex(uuid);
+        if (checkGetKey(key)) {
             throw new ExistStorageException(uuid);
         } else {
-            return index;
+            return key;
         }
     }
 
-    protected abstract void updateResume(Resume resume, Object index);
+    protected abstract void updateResume(Resume resume, Object key);
 
-    protected abstract void saveResume(Resume resume, Object index);
+    protected abstract void saveResume(Resume resume, Object key);
 
-    protected abstract void deleteResume(Object index);
+    protected abstract void deleteResume(Object key);
 
-    protected abstract Resume getResume(Object index);
+    protected abstract Resume getResume(Object key);
 
     protected abstract Object getIndex(String uuid);
 
-    protected abstract boolean checkGetIndex(Object index);
+    protected abstract boolean checkGetKey(Object key);
 }

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.function.Executable;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class AbstractStorageTest {
+public abstract class AbstractStorageTest5 {
     protected Storage storage;
     protected static final String UUID_1 = "uuid1";
     protected static final String UUID_2 = "uuid2";
@@ -24,7 +24,7 @@ public abstract class AbstractStorageTest {
     protected static final Resume RESUME_4 = new Resume(UUID_3);
     protected static final Resume RESUME_DUMMY = new Resume(DUMMY);
 
-    public AbstractStorageTest(Storage storage) {
+    public AbstractStorageTest5(Storage storage) {
         this.storage = storage;
     }
 

@@ -11,47 +11,46 @@ public abstract class AbstractStorage implements Storage {
     }
 
     public void save(Resume resume) {
-        if (resume.getUuid() == null) {
-            throw new NullPointerException("NullPointerException");
-        }
         saveResume(resume, checkExist(resume.getUuid()));
     }
 
     public void delete(String uuid) {
-        deleteResume(uuid, checkNotExist(uuid));
+        deleteResume(checkNotExist(uuid));
     }
 
     public Resume get(String uuid) {
-        return getResume(uuid,checkNotExist(uuid));
+        return getResume(checkNotExist(uuid));
     }
 
-    private int checkNotExist(String uuid) {
-        Integer index = getIndex(uuid);
-        if (index == null || index < 0) {
+    private Object checkNotExist(String uuid) {
+        Object index = getIndex(uuid);
+        if (!checkGetIndex(index)) {
             throw new NotExistStorageException(uuid);
         } else {
             return index;
         }
     }
 
-    private int checkExist(String uuid) {
-        Integer index = getIndex(uuid);
+    private Object checkExist(String uuid) {
+        Object index = getIndex(uuid);
         if (index == null) {
             return size();
-        } else if (index >= 0) {
+        } else if (checkGetIndex(index)) {
             throw new ExistStorageException(uuid);
         } else {
             return index;
         }
     }
 
-    protected abstract void updateResume(Resume resume, int index);
+    protected abstract void updateResume(Resume resume, Object index);
 
-    protected abstract void saveResume(Resume resume, int index);
+    protected abstract void saveResume(Resume resume, Object index);
 
-    protected abstract void deleteResume(String uuid, int index);
+    protected abstract void deleteResume(Object index);
 
-    protected abstract Resume getResume(String uuid, int index);
+    protected abstract Resume getResume(Object index);
 
-    protected abstract Integer getIndex(String uuid);
+    protected abstract Object getIndex(String uuid);
+
+    protected abstract boolean checkGetIndex(Object index);
 }

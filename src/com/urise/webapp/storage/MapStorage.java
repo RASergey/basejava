@@ -32,12 +32,12 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected void deleteResume(Object key) {
-        storage.remove(String.valueOf(key));
+        storage.remove((String) key);
     }
 
     @Override
     protected Resume getResume(Object key) {
-        return storage.get(String.valueOf(key));
+        return storage.get((String) key);
     }
 
     protected String getIndex(String uuid) {
@@ -46,6 +46,6 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     protected boolean checkGetKey(Object key) {
-        return storage.containsKey(String.valueOf(key));
+        return storage.containsKey((String) key);
     }
 }

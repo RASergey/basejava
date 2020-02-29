@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-abstract class AbstractArrayStorageTest55 extends AbstractStorageTest5 {
+abstract class AbstractArrayStorageTest5 extends AbstractStorageTest5 {
     private static final int STORAGE_LIMIT = 10_000;
 
-    public AbstractArrayStorageTest55(Storage storage) {
+    public AbstractArrayStorageTest5(Storage storage) {
         super(storage);
     }
 

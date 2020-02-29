@@ -2,9 +2,9 @@ package com.urise.webapp.storage.JUnit5;
 
 import com.urise.webapp.storage.SortedArrayStorage;
 
-class SortedArrayStorageTest55 extends AbstractArrayStorageTest55 {
+class SortedArrayStorageTest5 extends AbstractArrayStorageTest5 {
 
-    public SortedArrayStorageTest55() {
+    public SortedArrayStorageTest5() {
         super(new SortedArrayStorage());
     }
 }

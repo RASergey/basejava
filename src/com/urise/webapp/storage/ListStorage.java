@@ -3,47 +3,47 @@ package com.urise.webapp.storage;
 import com.urise.webapp.model.Resume;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListStorage extends AbstractStorage {
-    private ArrayList<Resume> storage = new ArrayList<>();
+    private List<Resume> list = new ArrayList<>();
 
     public int size() {
-        return storage.size();
+        return list.size();
     }
 
     public void clear() {
-        storage.clear();
+        list.clear();
     }
 
     public Resume[] getAll() {
-        return storage.toArray(Resume[]::new);
+        return list.toArray(Resume[]::new);
     }
 
     @Override
-    protected void updateResume(Resume resume, Object key) {
-        storage.set((Integer) key, resume);
+    protected void doUpdate(Resume resume, Object key) {
+        list.set((Integer) key, resume);
     }
 
     @Override
-    protected void saveResume(Resume resume, Object index) {
-        storage.add(resume);
+    protected void doSave(Resume resume, Object index) {
+        list.add(resume);
     }
 
     @Override
-    protected void deleteResume(Object key) {
-        int searchKey = (Integer) key;
-        storage.remove(searchKey);
+    protected void doDelete(Object key) {
+        list.remove(((Integer)key).intValue());
     }
 
     @Override
-    protected Resume getResume(Object key) {
-        return storage.get((Integer) key);
+    protected Resume doGet(Object key) {
+        return list.get((Integer) key);
     }
 
     @Override
-    protected Integer getIndex(String uuid) {
-        for (int i = 0; i < storage.size(); i++) {
-            if (storage.get(i).getUuid().equals(uuid)) {
+    protected Integer getSearchKey(String uuid) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUuid().equals(uuid)) {
                 return i;
             }
         }
@@ -51,7 +51,7 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean checkGetKey(Object index) {
+    protected boolean isExist(Object index) {
         return index != null;
     }
 }

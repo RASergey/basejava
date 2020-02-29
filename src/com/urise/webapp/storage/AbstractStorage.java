@@ -6,25 +6,37 @@ import com.urise.webapp.model.Resume;
 
 public abstract class AbstractStorage implements Storage {
 
+    protected abstract Object getSearchKey(String uuid);
+
+    protected abstract void doUpdate(Resume resume, Object key);
+
+    protected abstract boolean isExist(Object key);
+
+    protected abstract void doSave(Resume resume, Object key);
+
+    protected abstract Resume doGet(Object key);
+
+    protected abstract void doDelete(Object key);
+
     public void update(Resume resume) {
-        updateResume(resume, checkNotExist(resume.getUuid()));
+        doUpdate(resume, checkNotExist(resume.getUuid()));
     }
 
     public void save(Resume resume) {
-        saveResume(resume, checkExist(resume.getUuid()));
+        doSave(resume, checkExist(resume.getUuid()));
     }
 
     public void delete(String uuid) {
-        deleteResume(checkNotExist(uuid));
+        doDelete(checkNotExist(uuid));
     }
 
     public Resume get(String uuid) {
-        return getResume(checkNotExist(uuid));
+        return doGet(checkNotExist(uuid));
     }
 
     private Object checkNotExist(String uuid) {
-        Object key = getIndex(uuid);
-        if (!checkGetKey(key)) {
+        Object key = getSearchKey(uuid);
+        if (!isExist(key)) {
             throw new NotExistStorageException(uuid);
         } else {
             return key;
@@ -32,23 +44,11 @@ public abstract class AbstractStorage implements Storage {
     }
 
     private Object checkExist(String uuid) {
-        Object key = getIndex(uuid);
-        if (checkGetKey(key)) {
+        Object key = getSearchKey(uuid);
+        if (isExist(key)) {
             throw new ExistStorageException(uuid);
         } else {
             return key;
         }
     }
-
-    protected abstract void updateResume(Resume resume, Object key);
-
-    protected abstract void saveResume(Resume resume, Object key);
-
-    protected abstract void deleteResume(Object key);
-
-    protected abstract Resume getResume(Object key);
-
-    protected abstract Object getIndex(String uuid);
-
-    protected abstract boolean checkGetKey(Object key);
 }

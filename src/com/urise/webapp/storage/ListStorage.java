@@ -16,8 +16,8 @@ public class ListStorage extends AbstractStorage {
         list.clear();
     }
 
-    public Resume[] getAll() {
-        return list.toArray(Resume[]::new);
+    public List<Resume> getAll() {
+        return list;
     }
 
     @Override

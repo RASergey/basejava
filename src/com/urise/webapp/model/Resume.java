@@ -7,7 +7,6 @@ import java.util.UUID;
  */
 public class Resume {
 
-    // Unique identifier
     private String uuid;
     private String fullName;
 
@@ -32,8 +31,13 @@ public class Resume {
         return fullName;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     @Override
     public String toString() {
-        return uuid;
+        return "" + uuid +
+                " " + fullName;
     }
 }

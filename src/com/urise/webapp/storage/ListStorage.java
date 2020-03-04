@@ -8,16 +8,19 @@ import java.util.List;
 public class ListStorage extends AbstractStorage {
     private List<Resume> list = new ArrayList<>();
 
-    public int size() {
-        return list.size();
+    @Override
+    protected Integer getSearchKey(String uuid) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return null;
     }
 
-    public void clear() {
-        list.clear();
-    }
-
-    public List<Resume> getAll() {
-        return list;
+    @Override
+    protected boolean isExist(Object key) {
+        return key != null;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     protected void doDelete(Object key) {
-        list.remove(((Integer)key).intValue());
+        list.remove(((Integer) key).intValue());
     }
 
     @Override
@@ -41,17 +44,17 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    protected Integer getSearchKey(String uuid) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getUuid().equals(uuid)) {
-                return i;
-            }
-        }
-        return null;
+    public int size() {
+        return list.size();
     }
 
     @Override
-    protected boolean isExist(Object index) {
-        return index != null;
+    public void clear() {
+        list.clear();
+    }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        return list;
     }
 }

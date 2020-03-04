@@ -1,7 +1,7 @@
 package com.urise.webapp.main;
 
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.storage.MapUuidStorage;
+import com.urise.webapp.storage.MapResumeStorage;
 import com.urise.webapp.storage.Storage;
 
 import java.io.BufferedReader;
@@ -14,7 +14,7 @@ import java.util.List;
  * (just run, no need to understand)
  */
 public class MainArray {
-    private final static Storage ARRAY_STORAGE = new MapUuidStorage();
+    private final static Storage ARRAY_STORAGE = new MapResumeStorage();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -68,7 +68,7 @@ public class MainArray {
     }
 
     static void printAll() {
-        List<Resume> all = ARRAY_STORAGE.getAll();
+        List<Resume> all = ARRAY_STORAGE.getAllSorted();
         System.out.println("----------------------------");
         if (all.isEmpty()) {
             System.out.println("Empty");

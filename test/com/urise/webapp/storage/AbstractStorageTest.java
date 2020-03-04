@@ -6,10 +6,11 @@ import com.urise.webapp.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public abstract class AbstractStorageTest {
     protected Storage storage;
@@ -59,12 +60,9 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAll() {
-        List<Resume> resumes = new ArrayList<>();
-            resumes.add(RESUME_1);
-            resumes.add(RESUME_2);
-            resumes.add(RESUME_3);
-        assertEquals(resumes, storage.getAll());
-        assertEquals(storage.size(), resumes.size());
+        List<Resume> list = Arrays.asList(RESUME_1, RESUME_2, RESUME_3);
+        assertEquals(list, storage.getAllSorted());
+        assertEquals(storage.size(), list.size());
     }
 
     @Test

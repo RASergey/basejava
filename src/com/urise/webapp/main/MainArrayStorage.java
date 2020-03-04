@@ -7,7 +7,7 @@ import com.urise.webapp.storage.Storage;
 /**
  * Test for your ArrayStorage implementation
  */
-public class MainTestArrayStorage {
+public class MainArrayStorage {
     private static final Storage ARRAY_STORAGE = new MapUuidStorage();
 
     public static void main(String[] args) {
@@ -47,7 +47,7 @@ public class MainTestArrayStorage {
 
     static void printAll() {
         System.out.println("\nGet All");
-        for (Resume r : ARRAY_STORAGE.getAll()) {
+        for (Resume r : ARRAY_STORAGE.getAllSorted()) {
             System.out.println(r);
         }
     }

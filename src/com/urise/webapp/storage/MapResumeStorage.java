@@ -7,21 +7,21 @@ import java.util.*;
 public class MapResumeStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
-    protected class FullName {
+    private class FullName {
         private int count = 0;
 
-        protected void giveFullName(Resume resume) {
+        private void giveFullName(Resume resume) {
             String[] names = {"Nicholas Booth", "Harry Grant", "James Fox", "Harry Grant"};
             resume.setFullName(names[count++]);
         }
 
-        protected List<Resume> sortResume() {
+        private List<Resume> sortResume() {
             List<Resume> list = new ArrayList<>(map.values());
             list.sort(Comparator.comparing(Resume::getFullName));
             return list;
         }
 
-        protected Resume updateResume(Resume resume) {
+        private Resume updateResume(Resume resume) {
             resume.setFullName("Peter Parker");
             return resume;
         }

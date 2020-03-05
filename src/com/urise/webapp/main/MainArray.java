@@ -27,8 +27,17 @@ public class MainArray {
                 continue;
             }
             String uuid = null;
+            String fulName = null;
             if (params.length == 2) {
                 uuid = params[1].intern();
+                System.out.print("Введите Фамилию и Имя: ");
+                String[] params2 = reader.readLine().trim().split(" ");
+                if (params2.length != 2) {
+                    System.out.println("Неверно введены данные.");
+                    continue;
+                } else {
+                    fulName = params2[0] + " " + params2[1].intern();
+                }
             }
             switch (params[0]) {
                 case "list":
@@ -38,12 +47,12 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    resume = new Resume(uuid);
+                    resume = new Resume(uuid, fulName);
                     ARRAY_STORAGE.save(resume);
                     printAll();
                     break;
                 case "update":
-                    resume = new Resume(uuid);
+                    resume = new Resume(uuid, fulName);
                     ARRAY_STORAGE.update(resume);
                     printAll();
                     break;

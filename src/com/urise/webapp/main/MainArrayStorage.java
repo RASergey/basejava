@@ -11,15 +11,15 @@ public class MainArrayStorage {
     private static final Storage ARRAY_STORAGE = new MapUuidStorage();
 
     public static void main(String[] args) {
-        final Resume r1 = new Resume("uuid1");
-        final Resume r2 = new Resume("uuid2");
-        final Resume r3 = new Resume("uuid7");
-        final Resume r4 = new Resume("uuid4");
-        final Resume r5 = new Resume("uuid5");
-        final Resume r6 = new Resume("uuid9");
-        final Resume r7 = new Resume("uuid3");
-        final Resume r8 = new Resume("uuid6");
-        final Resume r9 = new Resume("uuid8");
+        final Resume r1 = new Resume("uuid1", "Rocky Balboa");
+        final Resume r2 = new Resume("uuid2", "Arnold Schwarzenegger");
+        final Resume r3 = new Resume("uuid3", "Chuck Norris");
+        final Resume r4 = new Resume("uuid4", "Jean Claude");
+        final Resume r5 = new Resume("uuid5", "Mickey Rourke");
+        final Resume r6 = new Resume("uuid6", "Bruce Lee");
+        final Resume r7 = new Resume("uuid7", "Rocky Balboa");
+        final Resume r8 = new Resume("uuid8", "Jean Claude");
+        final Resume r9 = new Resume("uuid9", "Sylvester Stallone");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);

@@ -7,31 +7,9 @@ import java.util.*;
 public class MapResumeStorage extends AbstractStorage {
     private Map<String, Resume> map = new HashMap<>();
 
-    private class FullName {
-        private int count = 0;
-
-        private void giveFullName(Resume resume) {
-            String[] names = {"Nicholas Booth", "Harry Grant", "James Fox", "Harry Grant"};
-            resume.setFullName(names[count++]);
-        }
-
-        private List<Resume> sortResume() {
-            List<Resume> list = new ArrayList<>(map.values());
-            list.sort(Comparator.comparing(Resume::getFullName));
-            return list;
-        }
-
-        private Resume updateResume(Resume resume) {
-            resume.setFullName("Peter Parker");
-            return resume;
-        }
-    }
-
-    FullName fullName = new FullName();
-
     @Override
-    protected Object getSearchKey(String uuid) {
-        return uuid;
+    protected Object getSearchKey(String fullName) {
+        return fullName;
     }
 
     @Override
@@ -41,13 +19,12 @@ public class MapResumeStorage extends AbstractStorage {
 
     @Override
     protected void doUpdate(Resume resume, Object key) {
-        map.replace((String) key, fullName.updateResume(resume));
+        map.replace((String) key, resume);
     }
 
     @Override
     protected void doSave(Resume resume, Object key) {
         map.put((String) key, resume);
-        fullName.giveFullName(resume);
     }
 
     @Override
@@ -61,8 +38,8 @@ public class MapResumeStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
-        return fullName.sortResume();
+    public List<Resume> getAll() {
+        return new ArrayList<>(map.values());
     }
 
     @Override

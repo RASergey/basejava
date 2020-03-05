@@ -11,7 +11,7 @@ public class Resume {
     private String fullName;
 
     public Resume() {
-        this(UUID.randomUUID().toString());
+        this.uuid = UUID.randomUUID().toString();
     }
 
     public Resume(String uuid) {
@@ -31,8 +31,21 @@ public class Resume {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Resume resume = (Resume) o;
+
+        if (!uuid.equals(resume.uuid)) return false;
+        return fullName.equals(resume.fullName);
+    }
+
+    public int hashCode(Resume resume) {
+        int result = uuid.hashCode();
+        result = 31 * result + fullName.hashCode();
+        return result;
     }
 
     @Override

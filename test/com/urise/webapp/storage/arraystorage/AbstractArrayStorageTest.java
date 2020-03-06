@@ -6,6 +6,8 @@ import com.urise.webapp.storage.AbstractStorageTest;
 import com.urise.webapp.storage.Storage;
 import org.junit.Test;
 
+import java.util.UUID;
+
 import static org.junit.Assert.fail;
 
 public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
@@ -20,11 +22,11 @@ public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
         try {
             storage.clear();
             for (int i = 0; i < STORAGE_LIMIT; i++) {
-                storage.save(new Resume());
+                storage.save(new Resume(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
             }
         } catch (StorageException exception) {
             fail(exception.getMessage());
         }
-        storage.save(new Resume());
+        storage.save(new Resume(UUID.randomUUID().toString(), UUID.randomUUID().toString()));
     }
 }

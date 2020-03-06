@@ -55,6 +55,6 @@ public class ListStorage extends AbstractStorage {
 
     @Override
     public List<Resume> getAll() {
-        return list;
+        return List.copyOf(list);
     }
 }

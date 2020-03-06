@@ -4,6 +4,7 @@ import com.urise.webapp.exception.ExistStorageException;
 import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -39,21 +40,9 @@ public abstract class AbstractStorage implements Storage {
         return doGet(checkNotExist(uuid));
     }
 
-    public static class ComparatorResume implements Comparator<Resume> {
-        @Override
-        public int compare(Resume o1, Resume o2) {
-            if (o1.getFullName().hashCode() == o2.getFullName().hashCode()) {
-                if (o1.getFullName().equals(o2.getFullName())) {
-                    return o1.getUuid().compareTo(o2.getUuid());
-                }
-            }
-            return o1.getFullName().compareTo(o2.getFullName());
-        }
-    }
-
     public List<Resume> getAllSorted() {
-        List<Resume> list = getAll();
-        list.sort(new ComparatorResume());
+        List<Resume> list = new ArrayList<>(getAll());
+        list.sort(Comparator.comparing(Resume::getFullName).thenComparing(Resume::getUuid));
         return list;
     }
 

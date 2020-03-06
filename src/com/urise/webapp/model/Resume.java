@@ -10,12 +10,9 @@ public class Resume {
     private String uuid;
     private String fullName;
 
-    public Resume() {
+    public Resume(String fullName) {
+        this.fullName = fullName;
         this.uuid = UUID.randomUUID().toString();
-    }
-
-    public Resume(String uuid) {
-        this.uuid = uuid;
     }
 
     public Resume(String uuid, String fullName) {
@@ -38,14 +35,14 @@ public class Resume {
 
         Resume resume = (Resume) o;
 
-        if (!fullName.equals(resume.fullName)) return false;
-        return uuid.equals(resume.uuid);
+        if (!uuid.equals(resume.uuid)) return false;
+        return fullName.equals(resume.fullName);
     }
 
     @Override
     public int hashCode() {
-        int result = fullName.hashCode();
-        result = 31 * result + uuid.hashCode();
+        int result = uuid.hashCode();
+        result = 31 * result + fullName.hashCode();
         return result;
     }
 

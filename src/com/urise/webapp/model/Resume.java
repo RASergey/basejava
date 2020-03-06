@@ -38,13 +38,14 @@ public class Resume {
 
         Resume resume = (Resume) o;
 
-        if (!uuid.equals(resume.uuid)) return false;
-        return fullName.equals(resume.fullName);
+        if (!fullName.equals(resume.fullName)) return false;
+        return uuid.equals(resume.uuid);
     }
 
-    public int hashCode(Resume resume) {
-        int result = uuid.hashCode();
-        result = 31 * result + fullName.hashCode();
+    @Override
+    public int hashCode() {
+        int result = fullName.hashCode();
+        result = 31 * result + uuid.hashCode();
         return result;
     }
 

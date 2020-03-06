@@ -42,8 +42,10 @@ public abstract class AbstractStorage implements Storage {
     public static class ComparatorResume implements Comparator<Resume> {
         @Override
         public int compare(Resume o1, Resume o2) {
-            if (o1.getFullName().equals(o2.getFullName())) {
-                return o1.getUuid().compareTo(o2.getUuid());
+            if (o1.getFullName().hashCode() == o2.getFullName().hashCode()) {
+                if (o1.getFullName().equals(o2.getFullName())) {
+                    return o1.getUuid().compareTo(o2.getUuid());
+                }
             }
             return o1.getFullName().compareTo(o2.getFullName());
         }

@@ -30,7 +30,7 @@ public class MapResumeStorage extends AbstractStorage {
     @Override
     protected void doDelete(Object key) {
         Resume resume = (Resume) key;
-        map.remove(resume.getUuid());
+        map.remove((resume.getUuid()));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class MapResumeStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAll() {
+    public List<Resume> doCopyAll() {
         return new ArrayList<>(map.values());
     }
 

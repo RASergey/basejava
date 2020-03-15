@@ -1,5 +1,9 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.model.section.Section;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -7,12 +11,14 @@ import java.util.UUID;
  * Initial resume class
  */
 public class Resume {
-
     private final String uuid;
     private final String fullName;
+    private Map<ContactSection, String> contacts = new HashMap<>();
+    protected Map<SectionType, Section> sectionMap = new HashMap<>();
+
 
     public Resume(String fullName) {
-        this(UUID.randomUUID().toString(),fullName);
+        this(UUID.randomUUID().toString(), fullName);
     }
 
     public Resume(String uuid, String fullName) {
@@ -22,12 +28,38 @@ public class Resume {
         this.fullName = fullName;
     }
 
+    public Resume(String uuid, String fullName, Map<SectionType, Section> sectionMap) {
+        this.uuid = uuid;
+        this.fullName = fullName;
+        this.sectionMap = sectionMap;
+    }
+
     public String getUuid() {
         return uuid;
     }
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getContacts(ContactSection type) {
+        return contacts.get(type);
+    }
+
+    public void setContacts(ContactSection type, String contact) {
+        this.contacts.put(type, contact);
+    }
+
+    public Object getSectionMap(SectionType type) {
+        return sectionMap.get(type);
+    }
+
+    public void setSectionMap(SectionType type, Object text) {
+        this.sectionMap.put(type, (Section) text);
+    }
+
+    public void setSection(SectionType type, Object text) {
+        new Section().setSections(type, text);
     }
 
     @Override
@@ -50,7 +82,6 @@ public class Resume {
 
     @Override
     public String toString() {
-        return "" + uuid +
-                " " + fullName;
+        return "" + fullName;
     }
 }

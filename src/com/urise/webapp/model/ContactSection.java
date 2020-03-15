@@ -1,9 +1,7 @@
 package com.urise.webapp.model;
 
 public enum ContactSection {
-    FULL_NAME("Фамилия Имя "){
-
-    },
+    FULL_NAME("Фамилия Имя "),
     EMAIL_ADDRESS("Эл.почта "),
     PHONE_NUMBER("Моб.тел. "),
     SKYPE("Skype ");

@@ -16,7 +16,6 @@ public class Resume {
     private Map<ContactSection, String> contacts = new HashMap<>();
     protected Map<SectionType, Section> sectionMap = new HashMap<>();
 
-
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
@@ -26,12 +25,6 @@ public class Resume {
         Objects.requireNonNull(fullName, "fullName must be null");
         this.uuid = uuid;
         this.fullName = fullName;
-    }
-
-    public Resume(String uuid, String fullName, Map<SectionType, Section> sectionMap) {
-        this.uuid = uuid;
-        this.fullName = fullName;
-        this.sectionMap = sectionMap;
     }
 
     public String getUuid() {
@@ -47,19 +40,15 @@ public class Resume {
     }
 
     public void setContacts(ContactSection type, String contact) {
-        this.contacts.put(type, contact);
+        contacts.put(type, contact);
     }
 
-    public Object getSectionMap(SectionType type) {
+    public Object getSection(SectionType type) {
         return sectionMap.get(type);
     }
 
-    public void setSectionMap(SectionType type, Object text) {
-        this.sectionMap.put(type, (Section) text);
-    }
-
-    public void setSection(SectionType type, Object text) {
-        new Section().setSections(type, text);
+    public void setSection(SectionType type, Section text) {
+        sectionMap.put(type, text);
     }
 
     @Override

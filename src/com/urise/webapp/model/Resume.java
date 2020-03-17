@@ -2,10 +2,7 @@ package com.urise.webapp.model;
 
 import com.urise.webapp.model.section.Section;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Initial resume class
@@ -13,8 +10,8 @@ import java.util.UUID;
 public class Resume {
     private final String uuid;
     private final String fullName;
-    private Map<ContactSection, String> contacts = new HashMap<>();
-    protected Map<SectionType, Section> sectionMap = new HashMap<>();
+    private final Map<ContactSection, String> contacts = new EnumMap<>(ContactSection.class);
+    protected final Map<SectionType, Section> sectionMap = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -55,9 +52,7 @@ public class Resume {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Resume resume = (Resume) o;
-
         if (!uuid.equals(resume.uuid)) return false;
         return fullName.equals(resume.fullName);
     }

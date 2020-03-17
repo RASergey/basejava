@@ -1,32 +1,30 @@
 package com.urise.webapp.model.section;
 
-import java.net.URL;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EducationSection {
-    private String nameOrganization;
-    private LocalDate trainedDate;
-    private LocalDate endTrainedDate;
-    private String academicDirection;
-    private URL urlOrganization;
+public class EducationSection extends Section {
+    private List<Organization> education = new ArrayList<>();
 
-    public EducationSection(String nameOrganization, LocalDate trainedDate, LocalDate endTrainedDate, String academicDirection, URL urlOrganization) {
-        this.nameOrganization = nameOrganization;
-        this.trainedDate = trainedDate;
-        this.endTrainedDate = endTrainedDate;
-        this.academicDirection = academicDirection;
-        this.urlOrganization = urlOrganization;
+    public void setExperience(Organization text) {
+        education.add(text);
     }
 
-    public LocalDate getEndTrainedDate() {
-        return endTrainedDate;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EducationSection that = (EducationSection) o;
+        return education.equals(that.education);
+    }
+
+    @Override
+    public int hashCode() {
+        return education.hashCode();
     }
 
     @Override
     public String toString() {
-        return "\n" + nameOrganization +
-                "\n" + trainedDate.getMonthValue() + "/" + trainedDate.getYear() + " - " + endTrainedDate.getMonthValue() + "/" + endTrainedDate.getYear() +
-                "\n" + academicDirection +
-                "\n" + urlOrganization + "";
+        return "" + education;
     }
 }

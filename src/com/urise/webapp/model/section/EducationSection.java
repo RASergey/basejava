@@ -3,7 +3,7 @@ package com.urise.webapp.model.section;
 import java.net.URL;
 import java.time.LocalDate;
 
-public class EducationSection extends Education {
+public class EducationSection {
     private String nameOrganization;
     private LocalDate trainedDate;
     private LocalDate endTrainedDate;
@@ -18,43 +18,15 @@ public class EducationSection extends Education {
         this.urlOrganization = urlOrganization;
     }
 
-    public String getNameOrganization() {
-        return nameOrganization;
-    }
-
-    public void setNameOrganization(String nameOrganization) {
-        this.nameOrganization = nameOrganization;
-    }
-
-    public LocalDate getTrainedDate() {
-        return trainedDate;
-    }
-
-    public void setTrainedDate(LocalDate trainedDate) {
-        this.trainedDate = trainedDate;
-    }
-
     public LocalDate getEndTrainedDate() {
         return endTrainedDate;
     }
 
-    public void setEndTrainedDate(LocalDate endTrainedDate) {
-        this.endTrainedDate = endTrainedDate;
-    }
-
-    public String getAcademicDirection() {
-        return academicDirection;
-    }
-
-    public void setAcademicDirection(String academicDirection) {
-        this.academicDirection = academicDirection;
-    }
-
-    public URL getUrlOrganization() {
-        return urlOrganization;
-    }
-
-    public void setUrlOrganization(URL urlOrganization) {
-        this.urlOrganization = urlOrganization;
+    @Override
+    public String toString() {
+        return "\n" + nameOrganization +
+                "\n" + trainedDate.getMonthValue() + "/" + trainedDate.getYear() + " - " + endTrainedDate.getMonthValue() + "/" + endTrainedDate.getYear() +
+                "\n" + academicDirection +
+                "\n" + urlOrganization + "";
     }
 }

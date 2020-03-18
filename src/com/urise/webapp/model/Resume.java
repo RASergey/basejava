@@ -10,7 +10,7 @@ import java.util.*;
 public class Resume {
     private final String uuid;
     private final String fullName;
-    private final Map<ContactSection, String> contacts = new EnumMap<>(ContactSection.class);
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     protected final Map<SectionType, Section> sectionMap = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
@@ -18,8 +18,8 @@ public class Resume {
     }
 
     public Resume(String uuid, String fullName) {
-        Objects.requireNonNull(uuid, "uuid must be null");
-        Objects.requireNonNull(fullName, "fullName must be null");
+        Objects.requireNonNull(uuid, "uuid must not be null");
+        Objects.requireNonNull(fullName, "fullName must not be null");
         this.uuid = uuid;
         this.fullName = fullName;
     }
@@ -32,11 +32,11 @@ public class Resume {
         return fullName;
     }
 
-    public String getContacts(ContactSection type) {
+    public String getContacts(ContactType type) {
         return contacts.get(type);
     }
 
-    public void setContacts(ContactSection type, String contact) {
+    public void setContacts(ContactType type, String contact) {
         contacts.put(type, contact);
     }
 

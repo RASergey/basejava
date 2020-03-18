@@ -1,6 +1,6 @@
 package com.urise.webapp.model;
 
-public enum ContactSection {
+public enum ContactType {
     FULL_NAME("Фамилия Имя "),
     EMAIL_ADDRESS("Эл.почта "),
     PHONE_NUMBER("Моб.тел. "),
@@ -8,7 +8,7 @@ public enum ContactSection {
 
     private String title;
 
-    ContactSection(String title) {
+    ContactType(String title) {
         this.title = title;
     }
 

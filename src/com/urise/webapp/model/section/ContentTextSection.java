@@ -3,10 +3,10 @@ package com.urise.webapp.model.section;
 import java.util.Objects;
 
 public class ContentTextSection extends Section {
-    private String text;
+    private final String text;
 
     public ContentTextSection(String text) {
-        Objects.requireNonNull(text, "text must be null");
+        Objects.requireNonNull(text, "text must not be null");
         this.text = text;
     }
 

@@ -1,6 +1,6 @@
 package com.urise.webapp.main;
 
-import com.urise.webapp.model.ContactSection;
+import com.urise.webapp.model.ContactType;
 import com.urise.webapp.model.SectionType;
 
 import java.util.Arrays;
@@ -12,7 +12,7 @@ public class TestSingleton {
             System.out.println(type.getTitle());
         }
 
-        Arrays.asList(ContactSection.values()).forEach(it -> System.out.println(it.getTitle()));
-        Arrays.asList(ContactSection.values()).forEach(System.out::println);
+        Arrays.asList(ContactType.values()).forEach(it -> System.out.println(it.getTitle()));
+        Arrays.asList(ContactType.values()).forEach(System.out::println);
     }
 }

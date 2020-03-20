@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrganizationSection extends Section {
-    private final List<Organization> organization = new ArrayList<>();
+    private final List<Organization> organizations = new ArrayList<>();
 
-    public void setOrganization(Organization content) {
-        organization.add(content);
+    public void setOrganizations(Organization content) {
+        organizations.add(content);
     }
 
     @Override
@@ -15,16 +15,16 @@ public class OrganizationSection extends Section {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrganizationSection that = (OrganizationSection) o;
-        return organization.equals(that.organization);
+        return organizations.equals(that.organizations);
     }
 
     @Override
     public int hashCode() {
-        return organization.hashCode();
+        return organizations.hashCode();
     }
 
     @Override
     public String toString() {
-        return "" + organization;
+        return "" + organizations;
     }
 }

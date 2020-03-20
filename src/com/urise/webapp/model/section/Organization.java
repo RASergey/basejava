@@ -1,6 +1,5 @@
 package com.urise.webapp.model.section;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -12,7 +11,7 @@ public class Organization {
     private final String duty;
     private final String urlOrganization;
 
-    public Organization(String nameOrganization, LocalDate workedDate, LocalDate endWorkedDate, String position, String duty, URL urlOrganization) {
+    public Organization(String nameOrganization, LocalDate workedDate, LocalDate endWorkedDate, String position, String duty, String urlOrganization) {
         Objects.requireNonNull(nameOrganization, "nameOrganization must not be null");
         Objects.requireNonNull(workedDate, "workedDate must not be null");
         Objects.requireNonNull(endWorkedDate, "endWorkedDate must not be null");
@@ -22,7 +21,7 @@ public class Organization {
         this.endWorkedDate = endWorkedDate;
         this.position = position;
         this.duty = duty;
-        this.urlOrganization = "" + urlOrganization;
+        this.urlOrganization = urlOrganization;
     }
 
     @Override
@@ -36,18 +35,14 @@ public class Organization {
         if (!workedDate.equals(that.workedDate)) return false;
         if (!endWorkedDate.equals(that.endWorkedDate)) return false;
         if (!position.equals(that.position)) return false;
-        if (duty != null ? !duty.equals(that.duty) : that.duty != null) return false;
-        return urlOrganization != null ? urlOrganization.equals(that.urlOrganization) : that.urlOrganization == null;
+        if (duty != null ? !Objects.equals(duty, that.duty) : that.duty != null) return false;
+        return urlOrganization != null ? Objects.equals(urlOrganization, that.urlOrganization) : that.urlOrganization == null;
     }
 
     @Override
     public int hashCode() {
         int result = nameOrganization.hashCode();
-        result = 31 * result + workedDate.hashCode();
-        result = 31 * result + endWorkedDate.hashCode();
-        result = 31 * result + position.hashCode();
-        result = 31 * result + (duty != null ? duty.hashCode() : 0);
-        result = 31 * result + (urlOrganization != null ? urlOrganization.hashCode() : 0);
+        result = 31 * result + Objects.hash(nameOrganization, workedDate, endWorkedDate, position, duty, urlOrganization);
         return result;
     }
 

@@ -5,27 +5,27 @@ import java.util.Objects;
 
 public class Organization {
     private Link homePage;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String position;
-    private String duty;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final String title;
+    private final String description;
 
-    public Organization(LocalDate startDate, LocalDate endDate, String position, String duty) {
+    public Organization(LocalDate startDate, LocalDate endDate, String title, String description) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.position = position;
-        this.duty = duty;
+        this.title = title;
+        this.description = description;
     }
 
-    public Organization(String nameOrganization, LocalDate startDate, LocalDate endDate, String position, String duty, String urlOrganization) {
-        Objects.requireNonNull(startDate, "workedDate must not be null");
-        Objects.requireNonNull(endDate, "endWorkedDate must not be null");
-        Objects.requireNonNull(position, "position must not be null");
+    public Organization(String nameOrganization, LocalDate startDate, LocalDate endDate, String title, String description, String urlOrganization) {
+        Objects.requireNonNull(startDate, "startDate must not be null");
+        Objects.requireNonNull(endDate, "endDate must not be null");
+        Objects.requireNonNull(title, "title must not be null");
         this.homePage = new Link(nameOrganization, urlOrganization);
         this.startDate = startDate;
         this.endDate = endDate;
-        this.position = position;
-        this.duty = duty;
+        this.title = title;
+        this.description = description;
     }
 
     public Link getHomePage() {
@@ -40,12 +40,12 @@ public class Organization {
         return endDate;
     }
 
-    public String getPosition() {
-        return position;
+    public String getTitle() {
+        return title;
     }
 
-    public String getDuty() {
-        return duty;
+    public String getDescription() {
+        return description;
     }
 
     @Override
@@ -58,8 +58,8 @@ public class Organization {
         if (!homePage.equals(that.homePage)) return false;
         if (!startDate.equals(that.startDate)) return false;
         if (!endDate.equals(that.endDate)) return false;
-        if (!position.equals(that.position)) return false;
-        return duty != null ? Objects.equals(duty, that.duty) : that.duty == null;
+        if (!title.equals(that.title)) return false;
+        return description != null ? Objects.equals(description, that.description) : that.description == null;
     }
 
     @Override
@@ -67,8 +67,8 @@ public class Organization {
         int result = homePage.hashCode();
         result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
-        result = 31 * result + position.hashCode();
-        result = 31 * result + (duty != null ? duty.hashCode() : 0);
+        result = 31 * result + title.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
 
@@ -76,7 +76,7 @@ public class Organization {
     public String toString() {
         return "\n" + homePage +
                 "\n" + startDate.getMonthValue() + "/" + startDate.getYear() + " - " + endDate.getMonthValue() + "/" + endDate.getYear() +
-                "\n" + position +
-                "\n" + duty;
+                "\n" + title +
+                "\n" + description;
     }
 }

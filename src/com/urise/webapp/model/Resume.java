@@ -55,7 +55,9 @@ public class Resume {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Resume resume = (Resume) o;
+
         if (!uuid.equals(resume.uuid)) return false;
         return fullName.equals(resume.fullName);
     }

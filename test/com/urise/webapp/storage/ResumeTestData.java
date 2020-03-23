@@ -11,14 +11,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResumeTestData {
+    private final static Storage STORAGE = new MapUuidStorage();
 
     public static void main(String[] args) {
+
         Resume resume = new Resume("Григорий Кислин");
         resume.setContacts(ContactType.FULL_NAME, resume.getFullName());
         resume.setContacts(ContactType.EMAIL_ADDRESS, "gkislin@yandex.ru");
         resume.setContacts(ContactType.PHONE_NUMBER, "+7(921) 855-0482");
         resume.setContacts(ContactType.SKYPE, "grigory.kislin");
-        Arrays.asList(ContactType.values()).forEach(it -> System.out.println(it.getTitle() + ": " + resume.getContacts(it)));
 
         resume.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
         resume.setSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
@@ -171,6 +172,24 @@ public class ResumeTestData {
                 "https://www.coursera.org/course/progfun");
         education.add(education6);
         resume.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Arrays.asList(SectionType.values()).forEach(it -> System.out.println(it.getTitle() + ": " + resume.getSection(it)));
+
+        STORAGE.save(resume);
+        printAll();
+        STORAGE.delete(resume.getUuid());
+        printAll();
+    }
+
+    static void printAll() {
+        List<Resume> all = STORAGE.getAllSorted();
+        System.out.println("----------------------------");
+        if (all.isEmpty()) {
+            System.out.println("Empty");
+        } else {
+            for (Resume resume : all) {
+                Arrays.asList(ContactType.values()).forEach(it -> System.out.println(it.getTitle() + ": " + resume.getContacts(it)));
+                Arrays.asList(SectionType.values()).forEach(it -> System.out.println(it.getTitle() + ": " + resume.getSection(it)));
+            }
+        }
+        System.out.println("----------------------------");
     }
 }

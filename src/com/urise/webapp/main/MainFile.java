@@ -3,7 +3,6 @@ package com.urise.webapp.main;
 public class MainFile {
 
     public static void main(String[] args) {
-        FileProject findFile = new FileProject();
 //        String filePath = "./.gitignore";
 //
 //        File file = new File(filePath);
@@ -18,6 +17,7 @@ public class MainFile {
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
+        FileProject findFile = new FileProject();
         String projectPath = "./src/com/urise/webapp";
         findFile.showProjectFile(projectPath);
     }

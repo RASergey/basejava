@@ -7,11 +7,10 @@ import com.urise.webapp.model.section.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ResumeTestData {
-    private final static Storage STORAGE = new MapUuidStorage();
+    private final static Storage STORAGE = new LocalStorage();
 
     public static void main(String[] args) {
 
@@ -173,9 +172,21 @@ public class ResumeTestData {
         education.add(education6);
         resume.setSection(SectionType.EDUCATION, new OrganizationSection(education));
 
+        Resume resume2 = new Resume(resume.getUuid(),"Папа Римский");
+        resume2.setContacts(ContactType.FULL_NAME, resume2.getFullName());
+        resume2.setContacts(ContactType.EMAIL_ADDRESS, "Pontifex@yandex.ru");
+        resume2.setContacts(ContactType.PHONE_NUMBER, "+49 (001) 11-8945");
+        resume2.setContacts(ContactType.SKYPE, "Pontifex");
+
         STORAGE.save(resume);
+        System.out.println(STORAGE.get(resume.getUuid()));
+        System.out.println(STORAGE.size());
+        printAll();
+        STORAGE.update(resume2);
+        System.out.println(STORAGE.get(resume.getUuid()));
         printAll();
         STORAGE.delete(resume.getUuid());
+        STORAGE.clear();
         printAll();
     }
 
@@ -185,9 +196,8 @@ public class ResumeTestData {
         if (all.isEmpty()) {
             System.out.println("Empty");
         } else {
-            for (Resume resume : all) {
-                Arrays.asList(ContactType.values()).forEach(it -> System.out.println(it.getTitle() + ": " + resume.getContacts(it)));
-                Arrays.asList(SectionType.values()).forEach(it -> System.out.println(it.getTitle() + ": " + resume.getSection(it)));
+            for (Resume r : all) {
+                System.out.println(r);
             }
         }
         System.out.println("----------------------------");

@@ -12,6 +12,8 @@ public class TestSingleton {
             System.out.println(type.getTitle());
         }
 
+//        Arrays.asList(ContactType.values()).forEach(it -> System.out.println(it.getTitle() + ": " + resume.getContacts(it)));
+//        Arrays.asList(SectionType.values()).forEach(it -> System.out.println(it.getTitle() + ": " + resume.getSection(it)));
         Arrays.asList(ContactType.values()).forEach(it -> System.out.println(it.getTitle()));
         Arrays.asList(ContactType.values()).forEach(System.out::println);
     }

@@ -27,22 +27,22 @@ public abstract class AbstractStorage<SK> implements Storage {
     protected abstract List<Resume> doCopyAll();
 
     public void update(Resume resume) {
-        LOG.info("update" + resume);
+        LOG.info("update " + resume);
         doUpdate(resume, checkNotExist(resume.getUuid()));
     }
 
     public void save(Resume resume) {
-        LOG.info("save" + resume);
+        LOG.info("save " + resume);
         doSave(resume, checkExist(resume.getUuid()));
     }
 
     public void delete(String uuid) {
-        LOG.info("delete" + uuid);
+        LOG.info("delete " + uuid);
         doDelete(checkNotExist(uuid));
     }
 
     public Resume get(String uuid) {
-        LOG.info("get" + uuid);
+        LOG.info("get " + uuid);
         return doGet(checkNotExist(uuid));
     }
 

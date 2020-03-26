@@ -10,13 +10,6 @@ public class Organization {
     private final String title;
     private final String description;
 
-    public Organization(LocalDate startDate, LocalDate endDate, String title, String description) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.title = title;
-        this.description = description;
-    }
-
     public Organization(String nameOrganization, LocalDate startDate, LocalDate endDate, String title, String description, String urlOrganization) {
         Objects.requireNonNull(startDate, "startDate must not be null");
         Objects.requireNonNull(endDate, "endDate must not be null");

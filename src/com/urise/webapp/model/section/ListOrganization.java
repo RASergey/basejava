@@ -6,25 +6,20 @@ import java.util.List;
 import java.util.Objects;
 
 public class ListOrganization extends Organization {
-    private final List<Object> organizationParagraphs = new ArrayList<>();
+    private List<Object> listOrganization = new ArrayList<>();
 
-    public ListOrganization(LocalDate startDate, LocalDate endDate, String position, String duty) {
-        super(startDate, endDate, position, duty);
-        organizationParagraphs.add(getStartDate());
-        organizationParagraphs.add(getEndDate());
-        organizationParagraphs.add(getTitle());
-        organizationParagraphs.add(getDescription());
-        organizationParagraphs.removeIf(Objects::isNull);
+    public ListOrganization(String nameOrganization, LocalDate startDate, LocalDate endDate, String title, String description, String urlOrganization) {
+        super(nameOrganization, startDate, endDate, title, description, urlOrganization);
+        listOrganization.add(getHomePage());
+        listOrganization.add(getStartDate());
+        listOrganization.add(getEndDate());
+        listOrganization.add(getTitle());
+        listOrganization.add(getDescription());
+        listOrganization.removeIf(Objects::isNull);
     }
 
-    public ListOrganization(String nameOrganization, LocalDate startDate, LocalDate endDate, String position, String duty, String urlOrganization) {
-        super(nameOrganization, startDate, endDate, position, duty, urlOrganization);
-        organizationParagraphs.add(getHomePage());
-        organizationParagraphs.add(getStartDate());
-        organizationParagraphs.add(getEndDate());
-        organizationParagraphs.add(getTitle());
-        organizationParagraphs.add(getDescription());
-        organizationParagraphs.removeIf(Objects::isNull);
+    public List<Object> getListOrganization() {
+        return listOrganization;
     }
 
     @Override
@@ -35,18 +30,18 @@ public class ListOrganization extends Organization {
 
         ListOrganization that = (ListOrganization) o;
 
-        return organizationParagraphs.equals(that.organizationParagraphs);
+        return listOrganization.equals(that.listOrganization);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + organizationParagraphs.hashCode();
+        result = 31 * result + listOrganization.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "\n" + organizationParagraphs;
+        return "\n" + listOrganization;
     }
 }

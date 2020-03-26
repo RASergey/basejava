@@ -15,9 +15,10 @@ import java.util.Objects;
 
 public class ResumeTestData extends AbstractStorageTest {
     public ResumeTestData() {
-        super(new MapUuidStorage());
+        super(new LocalStorage());
         RESUME_1 = resume;
     }
+
     static Resume resume = new Resume("Григорий Кислин");
 
     static {
@@ -25,7 +26,6 @@ public class ResumeTestData extends AbstractStorageTest {
         resume.setContacts(ContactType.EMAIL_ADDRESS, "gkislin@yandex.ru");
         resume.setContacts(ContactType.PHONE_NUMBER, "+7(921) 855-0482");
         resume.setContacts(ContactType.SKYPE, "grigory.kislin");
-
         resume.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
         resume.setSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
 
@@ -164,7 +164,7 @@ public class ResumeTestData extends AbstractStorageTest {
                 "https://www.coursera.org/course/progfun");
         resume.setSection(SectionType.EDUCATION, new OrganizationSection(education));
 
-        Resume resume2 = new Resume(resume.getUuid(),"Папа Римский");
+        Resume resume2 = new Resume(resume.getUuid(), "Папа Римский");
         resume2.setContacts(ContactType.FULL_NAME, resume2.getFullName());
         resume2.setContacts(ContactType.EMAIL_ADDRESS, "Pontifex@yandex.ru");
         resume2.setContacts(ContactType.PHONE_NUMBER, "+49 (001) 11-8945");

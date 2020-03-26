@@ -18,7 +18,7 @@ public class MainFile {
 //            throw new RuntimeException(e);
 //        }
         FileProject findFile = new FileProject();
-        String projectPath = "./src/com/urise/webapp";
+        String projectPath = "./src";
         findFile.showProjectFile(projectPath);
     }
 }

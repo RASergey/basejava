@@ -32,7 +32,7 @@ public class LocalStorage extends AbstractFileStorage {
     }
 
     @Override
-    protected Resume doReader(File file) throws IOException {
+    protected Resume doRead(File file) throws IOException {
         StringBuilder content = new StringBuilder();
         BufferedReader buff = new BufferedReader(new FileReader(file.getAbsolutePath()));
         String c;

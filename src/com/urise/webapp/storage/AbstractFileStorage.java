@@ -24,7 +24,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     protected abstract void doWrite(Resume resume, File file) throws IOException;
 
-    protected abstract Resume doReader(File file) throws IOException;
+    protected abstract Resume doRead(File file) throws IOException;
 
     @Override
     protected File getSearchKey(String uuid) {
@@ -39,12 +39,13 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void doSave(Resume resume, File file) {
         try {
-            if (file.createNewFile()) {
-                doWrite(resume, file);
+            if (!file.createNewFile()) {
+                throw new StorageException(" already exist", file.getName());
             }
         } catch (IOException e) {
-            throw new StorageException("IO error ", file.getName(), e);
+            throw new StorageException("not created file ", file.getName(), e);
         }
+        doUpdate(resume, file);
     }
 
     @Override
@@ -52,51 +53,56 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         try {
             doWrite(resume, file);
         } catch (IOException e) {
-            throw new StorageException("IO error ", file.getName(), e);
+            throw new StorageException("IO error ", file.getName() + " not exist", e);
         }
     }
 
     @Override
     protected Resume doGet(File file) {
         try {
-            return doReader(file);
+            return doRead(file);
         } catch (IOException e) {
-            throw new StorageException("IO error ", file.getName(), e);
+            throw new StorageException("IO error ", file.getName() + " not exist", e);
         }
     }
 
     @Override
     protected void doDelete(File file) {
-        if (file.delete()) {
-            System.out.println(file.getName() + " deleted");
+        if (!file.delete()) {
+            throw new StorageException("error!", file.getName() + " not exist");
         }
     }
 
     @Override
     protected List<Resume> doCopyAll() {
         List<Resume> list = new ArrayList<>();
-        for (File resume : Objects.requireNonNull(directory.listFiles())) {
-            try {
-                list.add(new Resume(new BufferedReader(new FileReader(resume.getAbsolutePath())).readLine()));
-            } catch (IOException e) {
-                throw new IllegalArgumentException(resume.getAbsolutePath() + " is not file");
+        try {
+            for (File resume : Objects.requireNonNull(directory.listFiles(), "directory must not be null")) {
+                list.add(doGet(resume));
             }
+        } catch (Exception e) {
+            throw new StorageException("directory must not be null", directory.getName(), e);
         }
         return list;
     }
 
     @Override
     public void clear() {
-        for (File file : Objects.requireNonNull(directory.listFiles())) {
-            if (file.delete()) {
-                System.out.println(file.getName() + " deleted");
+        try {
+            for (File file : Objects.requireNonNull(directory.listFiles(), "directory must not be null")) {
+                doDelete(file);
             }
-            System.out.println("all deleted");
+        } catch (Exception e) {
+            throw new StorageException("directory must not be null", directory.getName(), e);
         }
     }
 
     @Override
     public int size() {
-        return Objects.requireNonNull(directory.listFiles()).length;
+        try {
+            return Objects.requireNonNull(directory.list(), "directory is empty").length;
+        } catch (Exception e) {
+            throw new StorageException("directory must not be null", directory.getName(), e);
+        }
     }
 }

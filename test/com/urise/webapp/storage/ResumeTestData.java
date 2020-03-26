@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ResumeTestData {
-    private final static Storage STORAGE = new LocalStorage();
+public class ResumeTestData extends AbstractStorageTest {
+    public ResumeTestData() {
+        super(new MapUuidStorage());
+        RESUME_1 = resume;
+    }
+    static Resume resume = new Resume("Григорий Кислин");
 
-    public static void main(String[] args) {
-
-        Resume resume = new Resume("Григорий Кислин");
+    static {
         resume.setContacts(ContactType.FULL_NAME, resume.getFullName());
         resume.setContacts(ContactType.EMAIL_ADDRESS, "gkislin@yandex.ru");
         resume.setContacts(ContactType.PHONE_NUMBER, "+7(921) 855-0482");
@@ -167,20 +169,9 @@ public class ResumeTestData {
         resume2.setContacts(ContactType.EMAIL_ADDRESS, "Pontifex@yandex.ru");
         resume2.setContacts(ContactType.PHONE_NUMBER, "+49 (001) 11-8945");
         resume2.setContacts(ContactType.SKYPE, "Pontifex");
-
-        STORAGE.save(resume);
-        System.out.println(STORAGE.get(resume.getUuid()));
-        System.out.println(STORAGE.size());
-        printAll();
-        STORAGE.update(resume2);
-        System.out.println(STORAGE.get(resume.getUuid()));
-        printAll();
-        STORAGE.delete(resume.getUuid());
-        STORAGE.clear();
-        printAll();
     }
 
-    static void addListOrganization(List<ListOrganization> organizations, String nameOrganization, LocalDate startDate, LocalDate endDate, String title, String description, String urlOrganization) {
+    private static void addListOrganization(List<ListOrganization> organizations, String nameOrganization, LocalDate startDate, LocalDate endDate, String title, String description, String urlOrganization) {
         ListOrganization revers = new ListOrganization(nameOrganization, startDate, endDate, title, description, urlOrganization);
         for (ListOrganization item : organizations) {
             if (item.getListOrganization().contains(revers.getHomePage())) {
@@ -193,19 +184,6 @@ public class ResumeTestData {
             }
         }
         organizations.add(revers);
-    }
-
-    static void printAll() {
-        List<Resume> all = STORAGE.getAllSorted();
-        System.out.println("----------------------------");
-        if (all.isEmpty()) {
-            System.out.println("Empty");
-        } else {
-            for (Resume r : all) {
-                System.out.println(r);
-            }
-        }
-        System.out.println("----------------------------");
     }
 }
 

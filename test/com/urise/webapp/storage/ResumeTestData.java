@@ -3,8 +3,8 @@ package com.urise.webapp.storage;
 import com.urise.webapp.model.ContactType;
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.model.SectionType;
-import com.urise.webapp.model.section.ListOrganization;
 import com.urise.webapp.model.section.ListSection;
+import com.urise.webapp.model.section.Organization;
 import com.urise.webapp.model.section.OrganizationSection;
 import com.urise.webapp.model.section.TextSection;
 
@@ -56,7 +56,7 @@ public class ResumeTestData extends AbstractStorageTest {
         listSectionQualification.add("Родной русский, английский \"upper intermediate\"");
         resume.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
 
-        List<ListOrganization> experience = new ArrayList<>();
+        List<Organization> experience = new ArrayList<>();
         addListOrganization(experience, "Alcatel",
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(2005, 1, 1),
@@ -114,7 +114,7 @@ public class ResumeTestData extends AbstractStorageTest {
                 "http://javaops.ru/");
         resume.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
 
-        List<ListOrganization> education = new ArrayList<>();
+        List<Organization> education = new ArrayList<>();
         addListOrganization(education, "Заочная физико-техническая школа при МФТИ",
                 LocalDate.of(1984, 9, 1),
                 LocalDate.of(1987, 6, 1),
@@ -163,27 +163,18 @@ public class ResumeTestData extends AbstractStorageTest {
                 null,
                 "https://www.coursera.org/course/progfun");
         resume.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-
-        Resume resume2 = new Resume(resume.getUuid(), "Папа Римский");
-        resume2.setContacts(ContactType.FULL_NAME, resume2.getFullName());
-        resume2.setContacts(ContactType.EMAIL_ADDRESS, "Pontifex@yandex.ru");
-        resume2.setContacts(ContactType.PHONE_NUMBER, "+49 (001) 11-8945");
-        resume2.setContacts(ContactType.SKYPE, "Pontifex");
     }
 
-    private static void addListOrganization(List<ListOrganization> organizations, String nameOrganization, LocalDate startDate, LocalDate endDate, String title, String description, String urlOrganization) {
-        ListOrganization revers = new ListOrganization(nameOrganization, startDate, endDate, title, description, urlOrganization);
-        for (ListOrganization item : organizations) {
-            if (item.getListOrganization().contains(revers.getHomePage())) {
-                item.getListOrganization().add(revers.getStartDate());
-                item.getListOrganization().add(revers.getEndDate());
-                item.getListOrganization().add(revers.getTitle());
-                item.getListOrganization().add(revers.getDescription());
-                item.getListOrganization().removeIf(Objects::isNull);
+    private static void addListOrganization(List<Organization> organizations, String nameOrganization, LocalDate startDate, LocalDate endDate, String title, String description, String urlOrganization) {
+        Organization organization = new Organization(nameOrganization, startDate, endDate, title, description, urlOrganization);
+        for (Organization item : organizations) {
+            if (item.getListItems().contains(organization.getHomePage())) {
+                item.getListItems().add(organization.getPeriod());
+                item.getListItems().removeIf(Objects::isNull);
                 return;
             }
         }
-        organizations.add(revers);
+        organizations.add(organization);
     }
 }
 

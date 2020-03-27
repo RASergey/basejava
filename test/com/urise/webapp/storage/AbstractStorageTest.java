@@ -14,17 +14,15 @@ import static org.junit.Assert.assertSame;
 
 public abstract class AbstractStorageTest {
     protected Storage storage;
-    protected static final String UUID_1 = "uuid1";
     protected static final String UUID_2 = "uuid2";
     protected static final String UUID_3 = "uuid3";
     protected static final String UUID_4 = "uuid4";
     protected static final String DUMMY = "dummy";
-    private static final String FULL_NAME_1 = "Rocky Balboa";
     private static final String FULL_NAME_2 = "Arnold Schwarzenegger";
     private static final String FULL_NAME_3 = "Федяй Пупкин";
     private static final String FULL_NAME_4 = "Chuck Norris";
     private static final String FULL_NAME_5 = "Jean Claude";
-    protected static Resume RESUME_1 = new Resume(UUID_1, FULL_NAME_1);
+    protected static Resume RESUME_1 = ResumeTestData.RESUME;
     protected static final Resume RESUME_2 = new Resume(UUID_2, FULL_NAME_2);
     protected static final Resume RESUME_3 = new Resume(UUID_3, FULL_NAME_3);
     protected static final Resume RESUME_4 = new Resume(UUID_4, FULL_NAME_4);

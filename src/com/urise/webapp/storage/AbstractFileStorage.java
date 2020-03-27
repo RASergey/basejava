@@ -76,33 +76,29 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected List<Resume> doCopyAll() {
         List<Resume> list = new ArrayList<>();
-        try {
-            for (File resume : Objects.requireNonNull(directory.listFiles(), "directory must not be null")) {
-                list.add(doGet(resume));
-            }
-        } catch (Exception e) {
-            throw new StorageException("directory must not be null", directory.getName(), e);
+        for (File resume : checkNonNull()) {
+            list.add(doGet(resume));
         }
         return list;
     }
 
     @Override
     public void clear() {
-        try {
-            for (File file : Objects.requireNonNull(directory.listFiles(), "directory must not be null")) {
-                doDelete(file);
-            }
-        } catch (Exception e) {
-            throw new StorageException("directory must not be null", directory.getName(), e);
+        for (File file : checkNonNull()) {
+            doDelete(file);
         }
     }
 
     @Override
     public int size() {
-        try {
-            return Objects.requireNonNull(directory.list(), "directory is empty").length;
-        } catch (Exception e) {
-            throw new StorageException("directory must not be null", directory.getName(), e);
+        return checkNonNull().length;
+    }
+
+    private File[] checkNonNull() {
+        if(directory.listFiles() == null) {
+            throw new StorageException("directory must not be null", directory.getName());
+        } else {
+            return directory.listFiles();
         }
     }
 }

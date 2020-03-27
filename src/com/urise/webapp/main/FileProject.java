@@ -17,6 +17,8 @@ public class FileProject {
                 }
                 System.out.println();
             }
+        } else {
+            System.out.println(file.getName());
         }
     }
 }

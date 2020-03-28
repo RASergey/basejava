@@ -3,13 +3,13 @@ package com.urise.webapp.model.section;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Periods {
+public class Period {
     private final LocalDate startDate;
     private final LocalDate endDate;
     private final String title;
     private final String description;
 
-    public Periods(LocalDate startDate, LocalDate endDate, String title, String description) {
+    public Period(LocalDate startDate, LocalDate endDate, String title, String description) {
         Objects.requireNonNull(startDate, "startDate must not be null");
         Objects.requireNonNull(endDate, "endDate must not be null");
         Objects.requireNonNull(title, "title must not be null");
@@ -24,12 +24,12 @@ public class Periods {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Periods periods = (Periods) o;
+        Period period = (Period) o;
 
-        if (!startDate.equals(periods.startDate)) return false;
-        if (!endDate.equals(periods.endDate)) return false;
-        if (!title.equals(periods.title)) return false;
-        return description != null ? Objects.equals(description, periods.description) : periods.description == null;
+        if (!startDate.equals(period.startDate)) return false;
+        if (!endDate.equals(period.endDate)) return false;
+        if (!title.equals(period.title)) return false;
+        return description != null ? Objects.equals(description, period.description) : period.description == null;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Periods {
 
     @Override
     public String toString() {
-        return  "\n" + startDate.getMonthValue() + "/" + startDate.getYear() + " - " + endDate.getMonthValue() + "/" + endDate.getYear() +
+        return "\n" + startDate.getMonthValue() + "/" + startDate.getYear() + " - " + endDate.getMonthValue() + "/" + endDate.getYear() +
                 "\n" + title +
                 "\n" + description;
     }

@@ -71,6 +71,6 @@ public class Resume {
 
     @Override
     public String toString() {
-        return fullName;
+        return "\n" + fullName;
     }
 }

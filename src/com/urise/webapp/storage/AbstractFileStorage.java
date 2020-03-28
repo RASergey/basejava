@@ -91,14 +91,20 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        return checkNonNull().length;
+        String[] list = directory.list();
+        if (list == null) {
+            throw new StorageException("directory is empty", directory.getName());
+        } else {
+            return list.length;
+        }
     }
 
     private File[] checkNonNull() {
-        if(directory.listFiles() == null) {
+        File[] listFiles = directory.listFiles();
+        if (listFiles == null) {
             throw new StorageException("directory must not be null", directory.getName());
         } else {
-            return directory.listFiles();
+            return listFiles;
         }
     }
 }

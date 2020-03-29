@@ -3,8 +3,14 @@ package com.urise.webapp.model;
 public enum ContactType {
     FULL_NAME("Фамилия Имя"),
     EMAIL_ADDRESS("Эл.почта"),
-    PHONE_NUMBER("Моб.тел"),
-    SKYPE("Skype");
+    PHONE_NUMBER("Мобильный тел."),
+    HOME_PHONE("Домашний тел."),
+    PHONE("Рабочий тел."),
+    SKYPE("Skype"),
+    LINKEDIN("Профиль LinkedIn"),
+    GITHUB("Профиль GitHub"),
+    STATCKOVERFLOW("Профиль Stackoverflow"),
+    HOME_PAGE("Домашняя страница");
 
     private String title;
 

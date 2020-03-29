@@ -54,64 +54,64 @@ public class ResumeTestData {
 
 
         List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization(new Link("Alcatel", "http://www.alcatel.ru/"));
-        experience_1.getListItems().add(new Period(
+        Organization experience_1 = new Organization("Alcatel", "http://www.alcatel.ru/", new ArrayList<>());
+        experience_1.getPeriods().add(new Period(
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(2005, 1, 1),
                 "Инженер по аппаратному и программному тестированию",
                 "Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM)."));
         experience.add(experience_1);
         RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_2 = new Organization(new Link("Siemens AG", "https://www.siemens.com/ru/ru/home.html"));
-        experience_2.getListItems().add(new Period(
+        Organization experience_2 = new Organization("Siemens AG", "https://www.siemens.com/ru/ru/home.html", new ArrayList<>());
+        experience_2.getPeriods().add(new Period(
                 LocalDate.of(2005, 1, 1),
                 LocalDate.of(2007, 2, 1),
                 "Разработчик ПО",
                 "Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix)."));
         experience.add(experience_2);
         RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_3 = new Organization(new Link("Enkata", "http://enkata.com/"));
-        experience_3.getListItems().add(new Period(
+        Organization experience_3 = new Organization("Enkata", "http://enkata.com/", new ArrayList<>());
+        experience_3.getPeriods().add(new Period(
                 LocalDate.of(2007, 3, 1),
                 LocalDate.of(2008, 6, 1),
                 "Разработчик ПО",
                 "Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей кластерного J2EE приложения (OLAP, Data mining)."));
         experience.add(experience_3);
         RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_4 = new Organization(new Link("Yota", "https://www.yota.ru/"));
-        experience_4.getListItems().add(new Period(
+        Organization experience_4 = new Organization("Yota", "https://www.yota.ru/", new ArrayList<>());
+        experience_4.getPeriods().add(new Period(
                 LocalDate.of(2008, 6, 1),
                 LocalDate.of(2010, 12, 1),
                 "Ведущий специалист",
                 "Дизайн и имплементация Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J, EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). Реализация администрирования, статистики и мониторинга фреймворка. Разработка online JMX клиента (Python/ Jython, Django, ExtJS)"));
         experience.add(experience_4);
         RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_5 = new Organization(new Link("Luxoft (Deutsche Bank)", "http://www.luxoft.ru/"));
-        experience_5.getListItems().add(new Period(
+        Organization experience_5 = new Organization("Luxoft (Deutsche Bank)", "http://www.luxoft.ru/", new ArrayList<>());
+        experience_5.getPeriods().add(new Period(
                 LocalDate.of(2010, 12, 1),
                 LocalDate.of(2012, 4, 1),
                 "Ведущий программист",
                 "Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT, Jasper, Oracle). Реализация клиентской и серверной части CRM. Реализация RIA-приложения для администрирования, мониторинга и анализа результатов в области алгоритмического трейдинга. JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Highstock, Commet, HTML5."));
         experience.add(experience_5);
         RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_6 = new Organization(new Link("RIT Center", null));
-        experience_6.getListItems().add(new Period(
+        Organization experience_6 = new Organization("RIT Center", null, new ArrayList<>());
+        experience_6.getPeriods().add(new Period(
                 LocalDate.of(2012, 4, 1),
                 LocalDate.of(2014, 10, 1),
                 "Java архитектор",
                 "Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы (кастомизация Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной части системы. Разработка интергационных сервисов: CMIS, BPMN2, 1C (WebServices), сервисов общего назначения (почта, экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online редактирование из браузера документов MS Office. Maven + plugin development, Ant, Apache Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, Unix shell remote scripting via ssh tunnels, PL/Python"));
         experience.add(experience_6);
         RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_7 = new Organization(new Link("Wrike", "https://www.wrike.com/"));
-        experience_7.getListItems().add(new Period(
+        Organization experience_7 = new Organization("Wrike", "https://www.wrike.com/", new ArrayList<>());
+        experience_7.getPeriods().add(new Period(
                 LocalDate.of(2014, 10, 1),
                 LocalDate.of(20016, 1, 1),
                 "Старший разработчик (backend)",
                 "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO."));
         experience.add(experience_7);
         RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_8 = new Organization(new Link("Java Online Projects", "http://javaops.ru/"));
-        experience_8.getListItems().add(new Period(
+        Organization experience_8 = new Organization("Java Online Projects", "http://javaops.ru/", new ArrayList<>());
+        experience_8.getPeriods().add(new Period(
                 LocalDate.of(2013, 10, 1),
                 LocalDate.now(),
                 "Автор проекта.",
@@ -122,54 +122,54 @@ public class ResumeTestData {
 
         List<Organization> education = new ArrayList<>();
 
-        Organization education_1 = new Organization(new Link("Заочная физико-техническая школа при МФТИ", "http://www.school.mipt.ru/"));
-        education_1.getListItems().add(new Period(
+        Organization education_1 = new Organization("Заочная физико-техническая школа при МФТИ", "http://www.school.mipt.ru/", new ArrayList<>());
+        education_1.getPeriods().add(new Period(
                 LocalDate.of(1984, 9, 1),
                 LocalDate.of(1987, 6, 1),
                 "Закончил с отличием.",
                 null));
         education.add(education_1);
         RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_2 = new Organization(new Link("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики"
-                , "http://www.ifmo.ru/"));
-        education_2.getListItems().add(new Period(
+        Organization education_2 = new Organization("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики"
+                , "http://www.ifmo.ru/", new ArrayList<>());
+        education_2.getPeriods().add(new Period(
                 LocalDate.of(1987, 9, 1),
                 LocalDate.of(1993, 7, 1),
                 "Аспирантура (программист С, С++)",
                 null));
-        education_2.getListItems().add(new Period(
+        education_2.getPeriods().add(new Period(
                 LocalDate.of(1993, 9, 1),
                 LocalDate.of(1996, 7, 1),
                 "Инженер (программист Fortran, C)",
                 null));
         education.add(education_2);
         RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_3 = new Organization(new Link("Alcatel", "http://www.alcatel.ru/"));
-        education_3.getListItems().add(new Period(
+        Organization education_3 = new Organization("Alcatel", "http://www.alcatel.ru/", new ArrayList<>());
+        education_3.getPeriods().add(new Period(
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(1998, 3, 1),
                 "6 месяцев обучения цифровым телефонным сетям (Москва)",
                 null));
         education.add(education_3);
         RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_4 = new Organization(new Link("Siemens AG", "http://www.siemens.ru/"));
-        education_4.getListItems().add(new Period(
+        Organization education_4 = new Organization("Siemens AG", "http://www.siemens.ru/", new ArrayList<>());
+        education_4.getPeriods().add(new Period(
                 LocalDate.of(2005, 1, 1),
                 LocalDate.of(2005, 4, 1),
                 "3 месяца обучения мобильным IN сетям (Берлин)",
                 null));
         education.add(education_4);
         RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_5 = new Organization(new Link("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366"));
-        education_5.getListItems().add(new Period(
+        Organization education_5 = new Organization("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366", new ArrayList<>());
+        education_5.getPeriods().add(new Period(
                 LocalDate.of(2011, 3, 1),
                 LocalDate.of(2011, 4, 1),
                 "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"",
                 null));
         education.add(education_5);
         RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_6 = new Organization(new Link("Coursera", "https://www.coursera.org/course/progfun"));
-        education_6.getListItems().add(new Period(
+        Organization education_6 = new Organization("Coursera", "https://www.coursera.org/course/progfun", new ArrayList<>());
+        education_6.getPeriods().add(new Period(
                 LocalDate.of(2013, 3, 1),
                 LocalDate.of(2013, 5, 1),
                 "\"Functional Programming Principles in Scala\" by Martin Odersky",
@@ -195,8 +195,8 @@ public class ResumeTestData {
         RESUME_2.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
 
         List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization(new Link("\"experience 2\"", "http://www.\"experience 2\".ru/"));
-        experience_1.getListItems().add(new Period(
+        Organization experience_1 = new Organization("\"experience 2\"", "http://www.\"experience 2\".ru/", new ArrayList<>());
+        experience_1.getPeriods().add(new Period(
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(2005, 1, 1),
                 "\"experience 2\"",
@@ -205,13 +205,13 @@ public class ResumeTestData {
         RESUME_2.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization(new Link("\"education 2\"", "http://www.\"education 2\".ru/"));
-        education_1.getListItems().add(new Period(
+        Organization education_1 = new Organization("\"education 2\"", "http://www.\"education 2\".ru/", new ArrayList<>());
+        education_1.getPeriods().add(new Period(
                 LocalDate.of(1994, 9, 1),
                 LocalDate.of(1999, 6, 1),
                 "\"education 2.2\"",
                 null));
-        education_1.getListItems().add(new Period(
+        education_1.getPeriods().add(new Period(
                 LocalDate.of(1984, 9, 1),
                 LocalDate.of(1987, 6, 1),
                 "\"education 2\"",
@@ -237,8 +237,8 @@ public class ResumeTestData {
         RESUME_3.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
 
         List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization(new Link("\"experience 3\"", "http://www.\"experience 3\".ru/"));
-        experience_1.getListItems().add(new Period(
+        Organization experience_1 = new Organization("\"experience 3\"", "http://www.\"experience 3\".ru/", new ArrayList<>());
+        experience_1.getPeriods().add(new Period(
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(2005, 1, 1),
                 "\"experience 3\"",
@@ -247,8 +247,8 @@ public class ResumeTestData {
         RESUME_3.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization(new Link("\"education 3\"", "http://www.\"education 3\".ru/"));
-        education_1.getListItems().add(new Period(
+        Organization education_1 = new Organization("\"education 3\"", "http://www.\"education 3\".ru/", new ArrayList<>());
+        education_1.getPeriods().add(new Period(
                 LocalDate.of(1984, 9, 1),
                 LocalDate.of(1987, 6, 1),
                 "\"education 3\"",
@@ -274,8 +274,8 @@ public class ResumeTestData {
         RESUME_4.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
 
         List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization(new Link("\"experience 4\"", "http://www.\"experience 4\".ru/"));
-        experience_1.getListItems().add(new Period(
+        Organization experience_1 = new Organization("\"experience 4\"", "http://www.\"experience 4\".ru/", new ArrayList<>());
+        experience_1.getPeriods().add(new Period(
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(2005, 1, 1),
                 "\"experience 4\"",
@@ -284,8 +284,8 @@ public class ResumeTestData {
         RESUME_4.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization(new Link("\"education 4\"", "http://www.\"education 4\".ru/"));
-        education_1.getListItems().add(new Period(
+        Organization education_1 = new Organization("\"education 4\"", "http://www.\"education 4\".ru/", new ArrayList<>());
+        education_1.getPeriods().add(new Period(
                 LocalDate.of(1984, 9, 1),
                 LocalDate.of(1987, 6, 1),
                 "\"Рeducation 4\"",
@@ -311,8 +311,8 @@ public class ResumeTestData {
         RESUME_5.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
 
         List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization(new Link("\"experience 5\"", "http://www.\"experience 5\".ru/"));
-        experience_1.getListItems().add(new Period(
+        Organization experience_1 = new Organization("\"experience 5\"", "http://www.\"experience 5\".ru/", new ArrayList<>());
+        experience_1.getPeriods().add(new Period(
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(2005, 1, 1),
                 "\"experience 5\"",
@@ -321,8 +321,8 @@ public class ResumeTestData {
         RESUME_5.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization(new Link("\"education 5\"", "http://www.\"education 5\".ru/"));
-        education_1.getListItems().add(new Period(
+        Organization education_1 = new Organization("\"education 5\"", "http://www.\"education 5\".ru/", new ArrayList<>());
+        education_1.getPeriods().add(new Period(
                 LocalDate.of(1984, 9, 1),
                 LocalDate.of(1987, 6, 1),
                 "\"education 5\"",
@@ -348,8 +348,8 @@ public class ResumeTestData {
         RESUME_DUMMY.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
 
         List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization(new Link("\"experience DUMMY\"", "http://www.\"experience DUMMY\".ru/"));
-        experience_1.getListItems().add(new Period(
+        Organization experience_1 = new Organization("\"experience DUMMY\"", "http://www.\"experience DUMMY\".ru/", new ArrayList<>());
+        experience_1.getPeriods().add(new Period(
                 LocalDate.of(1997, 9, 1),
                 LocalDate.of(2005, 1, 1),
                 "\"experience DUMMY\"",
@@ -358,8 +358,8 @@ public class ResumeTestData {
         RESUME_DUMMY.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
 
         List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization(new Link("\"education DUMMY\"", "http://www.\"education DUMMY\".ru/"));
-        education_1.getListItems().add(new Period(
+        Organization education_1 = new Organization("\"education DUMMY\"", "http://www.\"education DUMMY\".ru/", new ArrayList<>());
+        education_1.getPeriods().add(new Period(
                 LocalDate.of(1984, 9, 1),
                 LocalDate.of(1987, 6, 1),
                 "\"education DUMMY\"",
@@ -367,7 +367,6 @@ public class ResumeTestData {
         education.add(education_1);
         RESUME_DUMMY.setSection(SectionType.EDUCATION, new OrganizationSection(education));
     } // Resume DUMMY
-
 }
 
 

@@ -1,19 +1,24 @@
 package com.urise.webapp.model.section;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Organization {
-    private List<Object> listItems = new ArrayList<>();
+    private final Link link;
+    private final List<Period> periods;
 
-    public Organization(Object object) {
-        Objects.requireNonNull(listItems, "listItems must not be null");
-        listItems.add(object);
+    public Organization(String name, String url, List<Period> periods) {
+        Objects.requireNonNull(periods, "listItems must not be null");
+        this.link = new Link(name, url);
+        this.periods = periods;
     }
 
-    public List<Object> getListItems() {
-        return listItems;
+    public Link getLink() {
+        return link;
+    }
+
+    public List<Period> getPeriods() {
+        return periods;
     }
 
     @Override
@@ -23,16 +28,19 @@ public class Organization {
 
         Organization that = (Organization) o;
 
-        return listItems.equals(that.listItems);
+        if (!link.equals(that.link)) return false;
+        return periods.equals(that.periods);
     }
 
     @Override
     public int hashCode() {
-        return listItems.hashCode();
+        int result = link.hashCode();
+        result = 31 * result + periods.hashCode();
+        return result;
     }
 
     @Override
     public String toString() {
-        return "\n" + listItems + "\n";
+        return "\n" + link + "" + periods;
     }
 }

@@ -3,11 +3,12 @@ package com.urise.webapp.storage;
 import com.urise.webapp.model.ContactType;
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.model.SectionType;
-import com.urise.webapp.model.section.*;
+import com.urise.webapp.model.section.ListSection;
+import com.urise.webapp.model.section.Organization;
+import com.urise.webapp.model.section.OrganizationSection;
+import com.urise.webapp.model.section.TextSection;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Month;
 
 public class ResumeTestData {
     public static final Resume RESUME_1 = new Resume("Григорий Кислин");
@@ -18,354 +19,295 @@ public class ResumeTestData {
     public static final Resume RESUME_DUMMY = new Resume("Розенбум Деревянный");
 
     static {
-        RESUME_1.setContacts(ContactType.FULL_NAME, RESUME_1.getFullName());
-        RESUME_1.setContacts(ContactType.EMAIL_ADDRESS, "gkislin@yandex.ru");
-        RESUME_1.setContacts(ContactType.PHONE_NUMBER, "+7(921) 855-0482");
-        RESUME_1.setContacts(ContactType.SKYPE, "grigory.kislin");
-        RESUME_1.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
-        RESUME_1.setSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
+        RESUME_1.addContacts(ContactType.FULL_NAME, RESUME_1.getFullName());
+        RESUME_1.addContacts(ContactType.EMAIL_ADDRESS, "gkislin@yandex.ru");
+        RESUME_1.addContacts(ContactType.PHONE_NUMBER, "+7(921) 855-0482");
+        RESUME_1.addContacts(ContactType.SKYPE, "grigory.kislin");
+        RESUME_1.addSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
+        RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
 
-        List<String> listSectionAchievement = new ArrayList<>();
-        listSectionAchievement.add("С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\"," + " \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\"." + " Организация онлайн стажировок и ведение проектов. Более 1000 выпускников.");
-        listSectionAchievement.add("Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.");
-        listSectionAchievement.add("Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM. Интеграция с 1С, Bonita BPM, CMIS, LDAP. Разработка приложения управления окружением на стеке: Scala/Play/Anorm/JQuery. Разработка SSO аутентификации и авторизации различных ERP модулей, интеграция CIFS/SMB java сервера.");
-        listSectionAchievement.add("Реализация c нуля Rich Internet Application приложения на стеке технологий JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Commet, HTML5, Highstock для алгоритмического трейдинга.");
-        listSectionAchievement.add("Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов (SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга системы по JMX (Jython/ Django).");
-        listSectionAchievement.add("Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.");
-        RESUME_1.setSection(SectionType.ACHIEVEMENT, new ListSection(listSectionAchievement));
+        RESUME_1.addSection(SectionType.ACHIEVEMENT, new ListSection(
+                "С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\"," + " \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\"." + " Организация онлайн стажировок и ведение проектов. Более 1000 выпускников.",
+                "Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.",
+                "Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM. Интеграция с 1С, Bonita BPM, CMIS, LDAP. Разработка приложения управления окружением на стеке: Scala/Play/Anorm/JQuery. Разработка SSO аутентификации и авторизации различных ERP модулей, интеграция CIFS/SMB java сервера.",
+                "Реализация c нуля Rich Internet Application приложения на стеке технологий JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Commet, HTML5, Highstock для алгоритмического трейдинга.",
+                "Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов (SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга системы по JMX (Jython/ Django).",
+                "Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа."
+        ));
 
-        List<String> listSectionQualification = new ArrayList<>();
-        listSectionQualification.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
-        listSectionQualification.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce");
-        listSectionQualification.add("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle,");
-        listSectionQualification.add("MySQL, SQLite, MS SQL, HSQLDB");
-        listSectionQualification.add("Languages: Java, Scala, Python)/Jython/PL-Python, JavaScript, Groovy,");
-        listSectionQualification.add("XML/XSD/XSLT, SQL, C/C++, Unix shell scripts,");
-        listSectionQualification.add("Java Frameworks: Java 8 (Time API, Streams), Guava, Java Executor, MyBatis, Spring (MVC, Security, Data, Clouds, Boot), JPA (Hibernate, EclipseLink), Guice, GWT(SmartGWT, ExtGWT)/GXT), Vaadin, Jasperreports, Apache Commons, Eclipse SWT, JUnit, Selenium (htmlelements).");
-        listSectionQualification.add("Python: Django.");
-        listSectionQualification.add("JavaScript: jQuery, ExtJS, Bootstrap.js, underscore.js");
-        listSectionQualification.add("Scala: SBT, Play2, Specs2, Anorm, Spray, Akka");
-        listSectionQualification.add("Технологии: Servlet, JSP/JSTL, JAX-WS, REST, EJB, RMI, JMS, JavaMail, JAXB, StAX, SAX, DOM, XSLT, MDB, JMX, JDBC, JPA, JNDI, JAAS, SOAP, AJAX, Commet, HTML5, ESB, CMIS, BPMN2, LDAP, OAuth1, OAuth2, JWT.)");
-        listSectionQualification.add("Инструменты: Maven + plugin development, Gradle, настройка Ngnix,");
-        listSectionQualification.add("администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, Nagios, iReport, OpenCmis, Bonita, pgBouncer.");
-        listSectionQualification.add("Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, архитектурных шаблонов, UML, функционального программирования");
-        listSectionQualification.add("Родной русский, английский \"upper intermediate\"");
-        RESUME_1.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
+        RESUME_1.addSection(SectionType.QUALIFICATIONS, new ListSection(
+                "JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2",
+                "Version control: Subversion, Git, Mercury, ClearCase, Perforce",
+                "DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle,",
+                "MySQL, SQLite, MS SQL, HSQLDB",
+                "Languages: Java, Scala, Python)/Jython/PL-Python, JavaScript, Groovy,",
+                "XML/XSD/XSLT, SQL, C/C++, Unix shell scripts,",
+                "Java Frameworks: Java 8 (Time API, Streams), Guava, Java Executor, MyBatis, Spring (MVC, Security, Data, Clouds, Boot), JPA (Hibernate, EclipseLink), Guice, GWT(SmartGWT, ExtGWT)/GXT), Vaadin, Jasperreports, Apache Commons, Eclipse SWT, JUnit, Selenium (htmlelements).",
+                "Python: Django.",
+                "JavaScript: jQuery, ExtJS, Bootstrap.js, underscore.js",
+                "Scala: SBT, Play2, Specs2, Anorm, Spray, Akka",
+                "Технологии: Servlet, JSP/JSTL, JAX-WS, REST, EJB, RMI, JMS, JavaMail, JAXB, StAX, SAX, DOM, XSLT, MDB, JMX, JDBC, JPA, JNDI, JAAS, SOAP, AJAX, Commet, HTML5, ESB, CMIS, BPMN2, LDAP, OAuth1, OAuth2, JWT.)",
+                "Инструменты: Maven + plugin development, Gradle, настройка Ngnix,",
+                "администрирование Hudson/Jenkins, Ant + custom task, SoapUI, JPublisher, Flyway, Nagios, iReport, OpenCmis, Bonita, pgBouncer.",
+                "Отличное знание и опыт применения концепций ООП, SOA, шаблонов проектрирования, архитектурных шаблонов, UML, функционального программирования",
+                "Родной русский, английский \"upper intermediate\""
+        ));
 
+        RESUME_1.addSection(SectionType.EXPERIENCE, new OrganizationSection(
+                new Organization(
+                        "Alcatel", "http://www.alcatel.ru/",
+                        new Organization.Position(
+                                1997, Month.SEPTEMBER,
+                                2005, Month.JANUARY,
+                                "Инженер по аппаратному и программному тестированию",
+                                "Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM).")),
+                new Organization(
+                        "Siemens AG", "https://www.siemens.com/ru/ru/home.html",
+                        new Organization.Position(
+                                2005, Month.SEPTEMBER,
+                                2007, Month.FEBRUARY,
+                                "Разработчик ПО",
+                                "Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix).")),
+                new Organization(
+                        "Enkata", "http://enkata.com/",
+                        new Organization.Position(
+                                2007, Month.MARCH,
+                                2008, Month.JUNE,
+                                "Разработчик ПО",
+                                "Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей кластерного J2EE приложения (OLAP, Data mining).")),
+                new Organization(
+                        "Yota", "https://www.yota.ru/",
+                        new Organization.Position(
+                                2008, Month.JUNE,
+                                2010, Month.DECEMBER,
+                                "Ведущий специалист",
+                                "Дизайн и имплементация Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J, EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). Реализация администрирования, статистики и мониторинга фреймворка. Разработка online JMX клиента (Python)")),
+                new Organization(
+                        "Luxoft (Deutsche Bank)", "http://www.luxoft.ru/",
+                        new Organization.Position(
+                                2010, Month.DECEMBER,
+                                2012, Month.APRIL,
+                                "Ведущий программист",
+                                "Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT, Jasper, Oracle). Реализация клиентской и серверной части CRM. Реализация RIA-приложения для администрирования, мониторинга и анализа результатов в области алгоритмического трейдинга. JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Highstock, Commet, HTML5.")),
+                new Organization(
+                        "RIT Center", null,
+                        new Organization.Position(
+                                2012, Month.APRIL,
+                                2014, Month.OCTOBER,
+                                "Java архитектор",
+                                "Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы (кастомизация Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной части системы. Разработка интергационных сервисов: CMIS, BPMN2, 1C (WebServices), сервисов общего назначения (почта, экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online редактирование из браузера документов MS Office. Maven + plugin development, Ant, Apache Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, Unix shell remote scripting via ssh tunnels, PL")),
+                new Organization(
+                        "Wrike", "https://www.wrike.com/",
+                        new Organization.Position(
+                                2014, Month.OCTOBER,
+                                2016, Month.JANUARY,
+                                "Старший разработчик (backend)",
+                                "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.")),
+                new Organization(
+                        "Java Online Projects", "http://javaops.ru/",
+                        new Organization.Position(
+                                2013, Month.OCTOBER,
+                                "Автор проекта.",
+                                "Создание, организация и проведение Java онлайн проектов и стажировок."))));
 
-        List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization("Alcatel", "http://www.alcatel.ru/", new ArrayList<>());
-        experience_1.getPeriods().add(new Period(
-                LocalDate.of(1997, 9, 1),
-                LocalDate.of(2005, 1, 1),
-                "Инженер по аппаратному и программному тестированию",
-                "Тестирование, отладка, внедрение ПО цифровой телефонной станции Alcatel 1000 S12 (CHILL, ASM)."));
-        experience.add(experience_1);
-        RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_2 = new Organization("Siemens AG", "https://www.siemens.com/ru/ru/home.html", new ArrayList<>());
-        experience_2.getPeriods().add(new Period(
-                LocalDate.of(2005, 1, 1),
-                LocalDate.of(2007, 2, 1),
-                "Разработчик ПО",
-                "Разработка информационной модели, проектирование интерфейсов, реализация и отладка ПО на мобильной IN платформе Siemens @vantage (Java, Unix)."));
-        experience.add(experience_2);
-        RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_3 = new Organization("Enkata", "http://enkata.com/", new ArrayList<>());
-        experience_3.getPeriods().add(new Period(
-                LocalDate.of(2007, 3, 1),
-                LocalDate.of(2008, 6, 1),
-                "Разработчик ПО",
-                "Реализация клиентской (Eclipse RCP) и серверной (JBoss 4.2, Hibernate 3.0, Tomcat, JMS) частей кластерного J2EE приложения (OLAP, Data mining)."));
-        experience.add(experience_3);
-        RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_4 = new Organization("Yota", "https://www.yota.ru/", new ArrayList<>());
-        experience_4.getPeriods().add(new Period(
-                LocalDate.of(2008, 6, 1),
-                LocalDate.of(2010, 12, 1),
-                "Ведущий специалист",
-                "Дизайн и имплементация Java EE фреймворка для отдела \"Платежные Системы\" (GlassFish v2.1, v3, OC4J, EJB3, JAX-WS RI 2.1, Servlet 2.4, JSP, JMX, JMS, Maven2). Реализация администрирования, статистики и мониторинга фреймворка. Разработка online JMX клиента (Python/ Jython, Django, ExtJS)"));
-        experience.add(experience_4);
-        RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_5 = new Organization("Luxoft (Deutsche Bank)", "http://www.luxoft.ru/", new ArrayList<>());
-        experience_5.getPeriods().add(new Period(
-                LocalDate.of(2010, 12, 1),
-                LocalDate.of(2012, 4, 1),
-                "Ведущий программист",
-                "Участие в проекте Deutsche Bank CRM (WebLogic, Hibernate, Spring, Spring MVC, SmartGWT, GWT, Jasper, Oracle). Реализация клиентской и серверной части CRM. Реализация RIA-приложения для администрирования, мониторинга и анализа результатов в области алгоритмического трейдинга. JPA, Spring, Spring-MVC, GWT, ExtGWT (GXT), Highstock, Commet, HTML5."));
-        experience.add(experience_5);
-        RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_6 = new Organization("RIT Center", null, new ArrayList<>());
-        experience_6.getPeriods().add(new Period(
-                LocalDate.of(2012, 4, 1),
-                LocalDate.of(2014, 10, 1),
-                "Java архитектор",
-                "Организация процесса разработки системы ERP для разных окружений: релизная политика, версионирование, ведение CI (Jenkins), миграция базы (кастомизация Flyway), конфигурирование системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной части системы. Разработка интергационных сервисов: CMIS, BPMN2, 1C (WebServices), сервисов общего назначения (почта, экспорт в pdf, doc, html). Интеграция Alfresco JLAN для online редактирование из браузера документов MS Office. Maven + plugin development, Ant, Apache Commons, Spring security, Spring MVC, Tomcat,WSO2, xcmis, OpenCmis, Bonita, Python scripting, Unix shell remote scripting via ssh tunnels, PL/Python"));
-        experience.add(experience_6);
-        RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_7 = new Organization("Wrike", "https://www.wrike.com/", new ArrayList<>());
-        experience_7.getPeriods().add(new Period(
-                LocalDate.of(2014, 10, 1),
-                LocalDate.of(20016, 1, 1),
-                "Старший разработчик (backend)",
-                "Проектирование и разработка онлайн платформы управления проектами Wrike (Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO."));
-        experience.add(experience_7);
-        RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        Organization experience_8 = new Organization("Java Online Projects", "http://javaops.ru/", new ArrayList<>());
-        experience_8.getPeriods().add(new Period(
-                LocalDate.of(2013, 10, 1),
-                LocalDate.now(),
-                "Автор проекта.",
-                "Создание, организация и проведение Java онлайн проектов и стажировок."));
-        RESUME_1.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-        experience.add(experience_8);
-
-
-        List<Organization> education = new ArrayList<>();
-
-        Organization education_1 = new Organization("Заочная физико-техническая школа при МФТИ", "http://www.school.mipt.ru/", new ArrayList<>());
-        education_1.getPeriods().add(new Period(
-                LocalDate.of(1984, 9, 1),
-                LocalDate.of(1987, 6, 1),
-                "Закончил с отличием.",
-                null));
-        education.add(education_1);
-        RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_2 = new Organization("Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики"
-                , "http://www.ifmo.ru/", new ArrayList<>());
-        education_2.getPeriods().add(new Period(
-                LocalDate.of(1987, 9, 1),
-                LocalDate.of(1993, 7, 1),
-                "Аспирантура (программист С, С++)",
-                null));
-        education_2.getPeriods().add(new Period(
-                LocalDate.of(1993, 9, 1),
-                LocalDate.of(1996, 7, 1),
-                "Инженер (программист Fortran, C)",
-                null));
-        education.add(education_2);
-        RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_3 = new Organization("Alcatel", "http://www.alcatel.ru/", new ArrayList<>());
-        education_3.getPeriods().add(new Period(
-                LocalDate.of(1997, 9, 1),
-                LocalDate.of(1998, 3, 1),
-                "6 месяцев обучения цифровым телефонным сетям (Москва)",
-                null));
-        education.add(education_3);
-        RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_4 = new Organization("Siemens AG", "http://www.siemens.ru/", new ArrayList<>());
-        education_4.getPeriods().add(new Period(
-                LocalDate.of(2005, 1, 1),
-                LocalDate.of(2005, 4, 1),
-                "3 месяца обучения мобильным IN сетям (Берлин)",
-                null));
-        education.add(education_4);
-        RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_5 = new Organization("Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366", new ArrayList<>());
-        education_5.getPeriods().add(new Period(
-                LocalDate.of(2011, 3, 1),
-                LocalDate.of(2011, 4, 1),
-                "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"",
-                null));
-        education.add(education_5);
-        RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
-        Organization education_6 = new Organization("Coursera", "https://www.coursera.org/course/progfun", new ArrayList<>());
-        education_6.getPeriods().add(new Period(
-                LocalDate.of(2013, 3, 1),
-                LocalDate.of(2013, 5, 1),
-                "\"Functional Programming Principles in Scala\" by Martin Odersky",
-                null));
-        education.add(education_6);
-        RESUME_1.setSection(SectionType.EDUCATION, new OrganizationSection(education));
+        RESUME_1.addSection(SectionType.EDUCATION, new OrganizationSection(
+                new Organization(
+                        "Заочная физико-техническая школа при МФТИ", "http://www.school.mipt.ru/",
+                        new Organization.Position(
+                                1984, Month.SEPTEMBER,
+                                1987, Month.JUNE,
+                                "Закончил с отличием.",
+                                null)),
+                new Organization(
+                        "Санкт-Петербургский национальный исследовательский университет информационных технологий, механики и оптики"
+                        , "http://www.ifmo.ru/",
+                        new Organization.Position(
+                                1987, Month.SEPTEMBER,
+                                1993, Month.JULY,
+                                "Аспирантура (программист С, С++)",
+                                null),
+                        new Organization.Position(
+                                1993, Month.SEPTEMBER,
+                                1996, Month.JULY,
+                                "Инженер (программист Fortran, C)",
+                                null)),
+                new Organization(
+                        "Alcatel", "http://www.alcatel.ru/",
+                        new Organization.Position(
+                                1997, Month.SEPTEMBER,
+                                1998, Month.MARCH,
+                                "6 месяцев обучения цифровым телефонным сетям (Москва)",
+                                null)),
+                new Organization(
+                        "Siemens AG", "http://www.siemens.ru/",
+                        new Organization.Position(
+                                2005, Month.JANUARY,
+                                2005, Month.APRIL,
+                                "3 месяца обучения мобильным IN сетям (Берлин)",
+                                null)),
+                new Organization(
+                        "Luxoft", "http://www.luxoft-training.ru/training/catalog/course.html?ID=22366",
+                        new Organization.Position(
+                                2011, Month.MARCH,
+                                2011, Month.APRIL,
+                                "Курс \"Объектно-ориентированный анализ ИС. Концептуальное моделирование на UML.\"",
+                                null)),
+                new Organization(
+                        "Coursera", "https://www.coursera.org/course/progfun",
+                        new Organization.Position(
+                                2013, Month.MARCH,
+                                2013, Month.MAY,
+                                "\"Functional Programming Principles in Scala\" by Martin Odersky",
+                                null))));
     } // Resume 1
 
     static {
-        RESUME_2.setContacts(ContactType.FULL_NAME, RESUME_2.getFullName());
-        RESUME_2.setContacts(ContactType.EMAIL_ADDRESS, "HumpbackedHorse@Fairytale.dom");
-        RESUME_2.setContacts(ContactType.PHONE_NUMBER, "+7(222) 222-2222");
-        RESUME_2.setContacts(ContactType.SKYPE, "Horse");
-        RESUME_2.setSection(SectionType.PERSONAL, new TextSection("Выполняет желания"));
-        RESUME_2.setSection(SectionType.OBJECTIVE, new TextSection("Друг Ивана"));
+        RESUME_2.addContacts(ContactType.FULL_NAME, RESUME_2.getFullName());
+        RESUME_2.addContacts(ContactType.EMAIL_ADDRESS, "HumpbackedHorse@Fairytale.dom");
+        RESUME_2.addContacts(ContactType.PHONE_NUMBER, "+7(222) 222-2222");
+        RESUME_2.addContacts(ContactType.SKYPE, "Horse");
+        RESUME_2.addSection(SectionType.PERSONAL, new TextSection("Выполняет желания"));
+        RESUME_2.addSection(SectionType.OBJECTIVE, new TextSection("Друг Ивана"));
 
-        List<String> listSectionAchievement = new ArrayList<>();
-        listSectionAchievement.add("ACHIEVEMENT");
-        RESUME_2.setSection(SectionType.ACHIEVEMENT, new ListSection(listSectionAchievement));
 
-        List<String> listSectionQualification = new ArrayList<>();
-        listSectionQualification.add("QUALIFICATIONS");
-        RESUME_2.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
+        RESUME_2.addSection(SectionType.ACHIEVEMENT, new ListSection("ACHIEVEMENT"));
+        RESUME_2.addSection(SectionType.QUALIFICATIONS, new ListSection("QUALIFICATIONS"));
 
-        List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization("\"experience 2\"", "http://www.\"experience 2\".ru/", new ArrayList<>());
-        experience_1.getPeriods().add(new Period(
-                LocalDate.of(1997, 9, 1),
-                LocalDate.of(2005, 1, 1),
-                "\"experience 2\"",
-                "\"experience 2\""));
-        experience.add(experience_1);
-        RESUME_2.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
+        RESUME_2.addSection(SectionType.EXPERIENCE, new OrganizationSection(
+                new Organization(
+                        "\"experience 2\"", "http://www.experience 2.ru/", new Organization.Position(
+                        1997, Month.SEPTEMBER,
+                        2005, Month.JANUARY,
+                        "\"experience 2\"",
+                        null))));
 
-        List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization("\"education 2\"", "http://www.\"education 2\".ru/", new ArrayList<>());
-        education_1.getPeriods().add(new Period(
-                LocalDate.of(1994, 9, 1),
-                LocalDate.of(1999, 6, 1),
-                "\"education 2.2\"",
-                null));
-        education_1.getPeriods().add(new Period(
-                LocalDate.of(1984, 9, 1),
-                LocalDate.of(1987, 6, 1),
-                "\"education 2\"",
-                null));
-        education.add(education_1);
-        RESUME_2.setSection(SectionType.EDUCATION, new OrganizationSection(education));
+        RESUME_2.addSection(SectionType.EDUCATION, new OrganizationSection(
+                new Organization(
+                        "\"education 2\"", "http://www.education 2.ru/",
+                        new Organization.Position(
+                                2013, Month.MARCH,
+                                2013, Month.MAY,
+                                "\"education 2\"",
+                                null),
+                        new Organization.Position(
+                                1984, Month.MARCH,
+                                1987, Month.MAY,
+                                "\"education 2\"",
+                                null))));
     } // Resume 2
 
     static {
-        RESUME_3.setContacts(ContactType.FULL_NAME, RESUME_3.getFullName());
-        RESUME_3.setContacts(ContactType.EMAIL_ADDRESS, "KarlsonAttic@Fairytale.dom");
-        RESUME_3.setContacts(ContactType.PHONE_NUMBER, "+7(333) 333-3333");
-        RESUME_3.setContacts(ContactType.SKYPE, "Karlson");
-        RESUME_3.setSection(SectionType.PERSONAL, new TextSection("Способен летать"));
-        RESUME_3.setSection(SectionType.OBJECTIVE, new TextSection("Живёт на крыше"));
+        RESUME_3.addContacts(ContactType.FULL_NAME, RESUME_3.getFullName());
+        RESUME_3.addContacts(ContactType.EMAIL_ADDRESS, "KarlsonAttic@Fairytale.dom");
+        RESUME_3.addContacts(ContactType.PHONE_NUMBER, "+7(333) 333-3333");
+        RESUME_3.addContacts(ContactType.SKYPE, "Karlson");
+        RESUME_3.addSection(SectionType.PERSONAL, new TextSection("Способен летать"));
+        RESUME_3.addSection(SectionType.OBJECTIVE, new TextSection("Живёт на крыше"));
 
-        List<String> listSectionAchievement = new ArrayList<>();
-        listSectionAchievement.add("ACHIEVEMENT");
-        RESUME_3.setSection(SectionType.ACHIEVEMENT, new ListSection(listSectionAchievement));
+        RESUME_3.addSection(SectionType.ACHIEVEMENT, new ListSection("ACHIEVEMENT"));
+        RESUME_3.addSection(SectionType.QUALIFICATIONS, new ListSection("QUALIFICATIONS"));
 
-        List<String> listSectionQualification = new ArrayList<>();
-        listSectionQualification.add("QUALIFICATIONS");
-        RESUME_3.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
+        RESUME_3.addSection(SectionType.EXPERIENCE, new OrganizationSection(
+                new Organization(
+                        "\"experience 3\"", "http://www.experience 3.ru/",
+                        new Organization.Position(
+                                1997, Month.SEPTEMBER,
+                                2005, Month.JANUARY,
+                                "\"experience 3\"",
+                                null))));
 
-        List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization("\"experience 3\"", "http://www.\"experience 3\".ru/", new ArrayList<>());
-        experience_1.getPeriods().add(new Period(
-                LocalDate.of(1997, 9, 1),
-                LocalDate.of(2005, 1, 1),
-                "\"experience 3\"",
-                "\"experience 3\""));
-        experience.add(experience_1);
-        RESUME_3.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-
-        List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization("\"education 3\"", "http://www.\"education 3\".ru/", new ArrayList<>());
-        education_1.getPeriods().add(new Period(
-                LocalDate.of(1984, 9, 1),
-                LocalDate.of(1987, 6, 1),
-                "\"education 3\"",
-                null));
-        education.add(education_1);
-        RESUME_3.setSection(SectionType.EDUCATION, new OrganizationSection(education));
+        RESUME_3.addSection(SectionType.EDUCATION, new OrganizationSection(
+                new Organization(
+                        "\"education 3\"", "http://www.education 3.ru/",
+                        new Organization.Position(
+                                2013, Month.MARCH,
+                                2013, Month.MAY,
+                                "\"education 3\"",
+                                null))));
     } // Resume 3
 
     static {
-        RESUME_4.setContacts(ContactType.FULL_NAME, RESUME_4.getFullName());
-        RESUME_4.setContacts(ContactType.EMAIL_ADDRESS, "LeopoldCat@Fairytale.dom");
-        RESUME_4.setContacts(ContactType.PHONE_NUMBER, "+7(444) 444-4444");
-        RESUME_4.setContacts(ContactType.SKYPE, "Leopold");
-        RESUME_4.setSection(SectionType.PERSONAL, new TextSection("Дружит со всеми"));
-        RESUME_4.setSection(SectionType.OBJECTIVE, new TextSection("Добрый котя"));
+        RESUME_4.addContacts(ContactType.FULL_NAME, RESUME_4.getFullName());
+        RESUME_4.addContacts(ContactType.EMAIL_ADDRESS, "LeopoldCat@Fairytale.dom");
+        RESUME_4.addContacts(ContactType.PHONE_NUMBER, "+7(444) 444-4444");
+        RESUME_4.addContacts(ContactType.SKYPE, "Leopold");
+        RESUME_4.addSection(SectionType.PERSONAL, new TextSection("Дружит со всеми"));
+        RESUME_4.addSection(SectionType.OBJECTIVE, new TextSection("Добрый котя"));
 
-        List<String> listSectionAchievement = new ArrayList<>();
-        listSectionAchievement.add("ACHIEVEMENT");
-        RESUME_4.setSection(SectionType.ACHIEVEMENT, new ListSection(listSectionAchievement));
+        RESUME_4.addSection(SectionType.ACHIEVEMENT, new ListSection("ACHIEVEMENT"));
+        RESUME_4.addSection(SectionType.QUALIFICATIONS, new ListSection("QUALIFICATIONS"));
 
-        List<String> listSectionQualification = new ArrayList<>();
-        listSectionQualification.add("QUALIFICATIONS");
-        RESUME_4.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
+        RESUME_4.addSection(SectionType.EXPERIENCE, new OrganizationSection(new Organization(
+                "\"experience 4\"", "http://www.experience 4.ru/",
+                new Organization.Position(
+                        1997, Month.SEPTEMBER,
+                        2005, Month.JANUARY,
+                        "\"experience 4\"",
+                        null))));
 
-        List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization("\"experience 4\"", "http://www.\"experience 4\".ru/", new ArrayList<>());
-        experience_1.getPeriods().add(new Period(
-                LocalDate.of(1997, 9, 1),
-                LocalDate.of(2005, 1, 1),
-                "\"experience 4\"",
-                "\"experience 4\""));
-        experience.add(experience_1);
-        RESUME_4.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-
-        List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization("\"education 4\"", "http://www.\"education 4\".ru/", new ArrayList<>());
-        education_1.getPeriods().add(new Period(
-                LocalDate.of(1984, 9, 1),
-                LocalDate.of(1987, 6, 1),
-                "\"Рeducation 4\"",
-                null));
-        education.add(education_1);
-        RESUME_4.setSection(SectionType.EDUCATION, new OrganizationSection(education));
+        RESUME_4.addSection(SectionType.EDUCATION, new OrganizationSection(new Organization(
+                "\"education 4\"", "http://www.education 4.ru/",
+                new Organization.Position(
+                        2013, Month.MARCH,
+                        2013, Month.MAY,
+                        "\"education 4\"",
+                        null))));
     } // Resume 4
 
     static {
-        RESUME_5.setContacts(ContactType.FULL_NAME, RESUME_5.getFullName());
-        RESUME_5.setContacts(ContactType.EMAIL_ADDRESS, "BunRunner@Fairytale.dom");
-        RESUME_5.setContacts(ContactType.PHONE_NUMBER, "+7(555) 555-5555");
-        RESUME_5.setContacts(ContactType.SKYPE, "Runner");
-        RESUME_5.setSection(SectionType.PERSONAL, new TextSection("Хлеб ему голова"));
-        RESUME_5.setSection(SectionType.OBJECTIVE, new TextSection("Батон в молодости"));
+        RESUME_5.addContacts(ContactType.FULL_NAME, RESUME_5.getFullName());
+        RESUME_5.addContacts(ContactType.EMAIL_ADDRESS, "BunRunner@Fairytale.dom");
+        RESUME_5.addContacts(ContactType.PHONE_NUMBER, "+7(555) 555-5555");
+        RESUME_5.addContacts(ContactType.SKYPE, "Runner");
+        RESUME_5.addSection(SectionType.PERSONAL, new TextSection("Хлеб ему голова"));
+        RESUME_5.addSection(SectionType.OBJECTIVE, new TextSection("Батон в молодости"));
 
-        List<String> listSectionAchievement = new ArrayList<>();
-        listSectionAchievement.add("ACHIEVEMENT");
-        RESUME_5.setSection(SectionType.ACHIEVEMENT, new ListSection(listSectionAchievement));
+        RESUME_5.addSection(SectionType.ACHIEVEMENT, new ListSection("ACHIEVEMENT"));
+        RESUME_5.addSection(SectionType.QUALIFICATIONS, new ListSection("QUALIFICATIONS"));
 
-        List<String> listSectionQualification = new ArrayList<>();
-        listSectionQualification.add("QUALIFICATIONS");
-        RESUME_5.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
+        RESUME_5.addSection(SectionType.EXPERIENCE, new OrganizationSection(new Organization(
+                "\"experience 5\"", "http://www.experience 5.ru/",
+                new Organization.Position(
+                        1997, Month.SEPTEMBER,
+                        2005, Month.JANUARY,
+                        "\"experience 5\"",
+                        null))));
 
-        List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization("\"experience 5\"", "http://www.\"experience 5\".ru/", new ArrayList<>());
-        experience_1.getPeriods().add(new Period(
-                LocalDate.of(1997, 9, 1),
-                LocalDate.of(2005, 1, 1),
-                "\"experience 5\"",
-                "\"experience 5\""));
-        experience.add(experience_1);
-        RESUME_5.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-
-        List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization("\"education 5\"", "http://www.\"education 5\".ru/", new ArrayList<>());
-        education_1.getPeriods().add(new Period(
-                LocalDate.of(1984, 9, 1),
-                LocalDate.of(1987, 6, 1),
-                "\"education 5\"",
-                null));
-        education.add(education_1);
-        RESUME_5.setSection(SectionType.EDUCATION, new OrganizationSection(education));
+        RESUME_5.addSection(SectionType.EDUCATION, new OrganizationSection(new Organization(
+                "\"education 5\"", "http://www.education 5.ru/",
+                new Organization.Position(
+                        2013, Month.MARCH,
+                        2013, Month.MAY,
+                        "\"education 5\"",
+                        null))));
     } // Resume 5
 
     static {
-        RESUME_DUMMY.setContacts(ContactType.FULL_NAME, RESUME_DUMMY.getFullName());
-        RESUME_DUMMY.setContacts(ContactType.EMAIL_ADDRESS, "RosenbaumWooden@Fairytale.dom");
-        RESUME_DUMMY.setContacts(ContactType.PHONE_NUMBER, "+7(123) 456-7890");
-        RESUME_DUMMY.setContacts(ContactType.SKYPE, "Wooden");
-        RESUME_DUMMY.setSection(SectionType.PERSONAL, new TextSection("Любит погулять"));
-        RESUME_DUMMY.setSection(SectionType.OBJECTIVE, new TextSection("Деревянный боцман, который спрятал у себя в шляпе Нильса"));
+        RESUME_DUMMY.addContacts(ContactType.FULL_NAME, RESUME_DUMMY.getFullName());
+        RESUME_DUMMY.addContacts(ContactType.EMAIL_ADDRESS, "RosenbaumWooden@Fairytale.dom");
+        RESUME_DUMMY.addContacts(ContactType.PHONE_NUMBER, "+7(123) 456-7890");
+        RESUME_DUMMY.addContacts(ContactType.SKYPE, "Wooden");
+        RESUME_DUMMY.addSection(SectionType.PERSONAL, new TextSection("Любит погулять"));
+        RESUME_DUMMY.addSection(SectionType.OBJECTIVE, new TextSection("Деревянный боцман, который спрятал у себя в шляпе Нильса"));
 
-        List<String> listSectionAchievement = new ArrayList<>();
-        listSectionAchievement.add("ACHIEVEMENT");
-        RESUME_DUMMY.setSection(SectionType.ACHIEVEMENT, new ListSection(listSectionAchievement));
+        RESUME_DUMMY.addSection(SectionType.ACHIEVEMENT, new ListSection("ACHIEVEMENT"));
+        RESUME_DUMMY.addSection(SectionType.QUALIFICATIONS, new ListSection("QUALIFICATIONS"));
 
-        List<String> listSectionQualification = new ArrayList<>();
-        listSectionQualification.add("QUALIFICATIONS");
-        RESUME_DUMMY.setSection(SectionType.QUALIFICATIONS, new ListSection(listSectionQualification));
+        RESUME_DUMMY.addSection(SectionType.EXPERIENCE, new OrganizationSection(new Organization(
+                "\"experience DUMMY\"", "http://www.experience DUMMY.ru/",
+                new Organization.Position(
+                        1997, Month.SEPTEMBER,
+                        2005, Month.JANUARY,
+                        "\"experience DUMMY\"",
+                        null))));
 
-        List<Organization> experience = new ArrayList<>();
-        Organization experience_1 = new Organization("\"experience DUMMY\"", "http://www.\"experience DUMMY\".ru/", new ArrayList<>());
-        experience_1.getPeriods().add(new Period(
-                LocalDate.of(1997, 9, 1),
-                LocalDate.of(2005, 1, 1),
-                "\"experience DUMMY\"",
-                "\"experience DUMMY\""));
-        experience.add(experience_1);
-        RESUME_DUMMY.setSection(SectionType.EXPERIENCE, new OrganizationSection(experience));
-
-        List<Organization> education = new ArrayList<>();
-        Organization education_1 = new Organization("\"education DUMMY\"", "http://www.\"education DUMMY\".ru/", new ArrayList<>());
-        education_1.getPeriods().add(new Period(
-                LocalDate.of(1984, 9, 1),
-                LocalDate.of(1987, 6, 1),
-                "\"education DUMMY\"",
-                null));
-        education.add(education_1);
-        RESUME_DUMMY.setSection(SectionType.EDUCATION, new OrganizationSection(education));
+        RESUME_DUMMY.addSection(SectionType.EDUCATION, new OrganizationSection(new Organization(
+                "\"education DUMMY\"", "http://www.education DUMMY.ru/",
+                new Organization.Position(
+                        2013, Month.MARCH,
+                        2013, Month.MAY,
+                        "\"education DUMMY\"",
+                        null))));
     } // Resume DUMMY
 }
 

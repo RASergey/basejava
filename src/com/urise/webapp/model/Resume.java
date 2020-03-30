@@ -39,15 +39,15 @@ public class Resume {
         return contacts.get(type);
     }
 
-    public void setContacts(ContactType type, String contact) {
-        contacts.put(type, contact);
-    }
-
     public Object getSection(SectionType type) {
         return sectionMap.get(type);
     }
 
-    public void setSection(SectionType type, Section text) {
+    public void addContacts(ContactType type, String contact) {
+        contacts.put(type, contact);
+    }
+
+    public void addSection(SectionType type, Section text) {
         sectionMap.put(type, text);
     }
 

@@ -9,17 +9,18 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class AbstractFileStorage extends AbstractStorage<File> {
-    private File directory;
+    private File dir;
 
-    protected AbstractFileStorage(File directory) {
-        Objects.requireNonNull(directory, "directory must not be null");
-        if (!directory.isDirectory()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
+    protected AbstractFileStorage(String directory) {
+        File checkDir = new File(directory);
+        Objects.requireNonNull(checkDir, "directory must not be null");
+        if (!checkDir.isDirectory()) {
+            throw new IllegalArgumentException(checkDir.getAbsolutePath() + " is not directory");
         }
-        if (!directory.canRead() || !directory.canWrite()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
+        if (!checkDir.canRead() || !checkDir.canWrite()) {
+            throw new IllegalArgumentException(checkDir.getAbsolutePath() + " is not readable/writable");
         }
-        this.directory = directory;
+        this.dir = checkDir;
     }
 
     protected abstract void doWrite(Resume resume, OutputStream os) throws IOException;
@@ -28,7 +29,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected File getSearchKey(String uuid) {
-        return new File(directory, uuid);
+        return new File(dir, uuid);
     }
 
     @Override
@@ -91,18 +92,18 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        String[] list = directory.list();
+        String[] list = dir.list();
         if (list == null) {
-            throw new StorageException("directory is empty", directory.getName());
+            throw new StorageException("directory is empty", dir.getName());
         } else {
             return list.length;
         }
     }
 
     private File[] checkNonNull() {
-        File[] listFiles = directory.listFiles();
+        File[] listFiles = dir.listFiles();
         if (listFiles == null) {
-            throw new StorageException("directory must not be null", directory.getName());
+            throw new StorageException("directory must not be null", dir.getName());
         } else {
             return listFiles;
         }

@@ -5,8 +5,8 @@ import com.urise.webapp.model.Resume;
 
 import java.io.*;
 
-public class ObjectStreamStorage extends AbstractFileStorage {
-    public ObjectStreamStorage(File directory) {
+public class ObjectStreamStorage extends AbstractPathStorage {
+    public ObjectStreamStorage(String directory) {
         super(directory);
     }
 
@@ -25,5 +25,4 @@ public class ObjectStreamStorage extends AbstractFileStorage {
             throw new StorageException("Error read resume", null, e);
         }
     }
-
 }

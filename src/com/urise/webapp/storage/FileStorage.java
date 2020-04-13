@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
+public class FileStorage extends AbstractStorage<File> {
     private File dir;
 
-    protected AbstractFileStorage(String directory) {
+    public FileStorage(String directory) {
         File checkDir = new File(directory);
         Objects.requireNonNull(checkDir, "directory must not be null");
         if (!checkDir.isDirectory()) {
@@ -23,12 +23,16 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         this.dir = checkDir;
     }
 
-    protected abstract void doWrite(Resume resume, OutputStream os) throws IOException;
+    public void doWrite(Resume resume, OutputStream os) throws IOException {
+        operationFile.doWrite(resume, os);
+    }
 
-    protected abstract Resume doRead(InputStream is) throws IOException;
+    public Resume doRead(InputStream is) throws IOException {
+        return operationFile.doRead(is);
+    }
 
     @Override
-    protected File getSearchKey(String uuid) {
+    public File getSearchKey(String uuid) {
         return new File(dir, uuid);
     }
 

@@ -3,20 +3,19 @@ package com.urise.webapp.storage;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public abstract class AbstractPathStorage extends AbstractStorage<Path> {
+public class PathStorage extends AbstractStorage<Path> {
     private Path directory;
 
-    protected AbstractPathStorage(String dir) {
+    public PathStorage(String dir) {
         directory = Paths.get(dir);
         Objects.requireNonNull(directory, "directory must not be null");
         if (!Files.isDirectory(directory) || !Files.isWritable(this.directory)) {
@@ -24,13 +23,17 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
         }
     }
 
-    protected abstract void doWrite(Resume resume, OutputStream os) throws IOException;
+    public void doWrite(Resume resume, OutputStream os) throws IOException {
+        operationFile.doWrite(resume, os);
+    }
 
-    protected abstract Resume doRead(InputStream is) throws IOException;
+    public Resume doRead(InputStream is) throws IOException {
+        return operationFile.doRead(is);
+    }
 
     @Override
     protected Path getSearchKey(String uuid) {
-        return Paths.get(directory.toAbsolutePath().toString(), uuid);
+        return Paths.get(directory.resolve(uuid).toString());
     }
 
     @Override
@@ -50,26 +53,18 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
 
     @Override
     public void clear() {
-        try {
-            Files.list(directory.toAbsolutePath()).forEach(this::doDelete);
-        } catch (IOException e) {
-            throw new StorageException("Path delete error", null);
-        }
+        checkNonNull().forEach(this::doDelete);
     }
 
     @Override
     public int size() {
-        try {
-            return (int) Files.list(directory.toAbsolutePath()).count();
-        } catch (IOException e) {
-            throw new StorageException("directory is empty", directory.getFileName().toString(), e);
-        }
+        return (int) checkNonNull().count();
     }
 
     @Override
     protected void doUpdate(Resume resume, Path path) {
         try {
-            doWrite(resume, Files.newOutputStream(path));
+            doWrite(resume, new BufferedOutputStream(Files.newOutputStream(path)));
         } catch (IOException e) {
             throw new StorageException("IO error ", path.getFileName() + " not exist", e);
         }
@@ -78,7 +73,7 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
     @Override
     protected Resume doGet(Path path) {
         try {
-            return doRead(Files.newInputStream(path));
+            return doRead(new BufferedInputStream(Files.newInputStream(path)));
         } catch (IOException e) {
             throw new StorageException("IO error ", path.getFileName() + " not exist", e);
         }
@@ -95,12 +90,14 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
 
     @Override
     protected List<Resume> doCopyAll() {
-        List<Resume> list = new ArrayList<>();
+        return checkNonNull().map(this::doGet).collect(Collectors.toList());
+    }
+
+    private Stream<Path> checkNonNull() {
         try {
-            Files.list(directory.toAbsolutePath()).forEach(path -> list.add(doGet(path)));
+            return Files.list(directory);
         } catch (IOException e) {
-            throw new StorageException("directory must not be null", directory.getFileName().toString());
+            throw new StorageException("directory must not be null", directory.getFileName().toString(), e);
         }
-        return list;
     }
 }

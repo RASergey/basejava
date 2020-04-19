@@ -2,6 +2,8 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
+import com.urise.webapp.strategies.ContextStrategy;
+import com.urise.webapp.strategies.ObjectStreamStrategy;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.Objects;
 
 public class FileStorage extends AbstractStorage<File> {
     private File dir;
+
+    ContextStrategy strategy = new ContextStrategy(new ObjectStreamStrategy());
 
     public FileStorage(String directory) {
         File checkDir = new File(directory);
@@ -21,14 +25,6 @@ public class FileStorage extends AbstractStorage<File> {
             throw new IllegalArgumentException(checkDir.getAbsolutePath() + " is not readable/writable");
         }
         this.dir = checkDir;
-    }
-
-    public void doWrite(Resume resume, OutputStream os) throws IOException {
-        operationFile.doWrite(resume, os);
-    }
-
-    public Resume doRead(InputStream is) throws IOException {
-        return operationFile.doRead(is);
     }
 
     @Override
@@ -56,7 +52,7 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected void doUpdate(Resume resume, File file) {
         try {
-            doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
+            strategy.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error ", file.getName() + " not exist", e);
         }
@@ -65,7 +61,7 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected Resume doGet(File file) {
         try {
-            return doRead(new BufferedInputStream(new FileInputStream(file)));
+            return strategy.doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error ", file.getName() + " not exist", e);
         }

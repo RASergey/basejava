@@ -1,43 +1,36 @@
 package com.urise.webapp.main;
 
-import com.urise.webapp.exception.StorageException;
-
-import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class MainFile {
 
     public static void main(String[] args) {
+        String projectPath = "./src";
+        showProjectFile(projectPath);
+    }
 
-        Path path = Paths.get("./src");
-        try {
-            Files.walkFileTree(path, new SimpleFileVisitor<>() {
-
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-                    int count = file.getNameCount() - path.getNameCount() + 1;
-                    count += file.getFileName().toString().length();
-
-                    String text = String.format("%" + count + "s", file.getFileName());
-                    text = text.replaceAll("[\\s]", "  ");
-                    System.out.println(text);
-                    return FileVisitResult.CONTINUE;
+    public static void showProjectFile(String path) {
+        File file = new File(path);
+        StringBuilder count = new StringBuilder();
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            String[] list = file.list();
+            Path dir = file.toPath();
+            int dirNameCount = dir.getNameCount();
+            while (Paths.get("./src").toAbsolutePath().getNameCount() < dirNameCount) {
+                count.append("  ");
+                dirNameCount--;
+            }
+            if (files != null) {
+                for (int i = 0; i < files.length; i++) {
+                    if (list != null) {
+                        System.out.println(count + list[i]);
+                    }
+                    showProjectFile(files[i].getAbsolutePath());
                 }
-
-                @Override
-                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-                    int count = dir.getNameCount() - path.getNameCount() + 1;
-                    count += dir.getFileName().toString().length();
-
-                    String text = String.format("%" + count + "s", dir.getFileName());
-                    text = text.replaceAll("[\\s]", "  ");
-                    System.out.println(text);
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-        } catch (IOException e) {
-            throw new StorageException("there was a problem reading the file ", path.getFileName().toString(), e);
+            }
         }
     }
 }

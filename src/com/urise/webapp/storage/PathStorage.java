@@ -2,8 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.strategies.ContextStrategy;
-import com.urise.webapp.strategies.ObjectStreamStrategy;
+import com.urise.webapp.strategies.Strategy;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -18,15 +17,16 @@ import java.util.stream.Stream;
 
 public class PathStorage extends AbstractStorage<Path> {
     private Path directory;
+    private Strategy strategy;
 
-    ContextStrategy strategy = new ContextStrategy(new ObjectStreamStrategy());
-
-    public PathStorage(String dir) {
+    public PathStorage(String dir, Strategy strategy) {
         directory = Paths.get(dir);
         Objects.requireNonNull(directory, "directory must not be null");
+        Objects.requireNonNull(strategy, "strategy must not be null");
         if (!Files.isDirectory(directory) || !Files.isWritable(this.directory)) {
             throw new IllegalArgumentException(dir + " is not directory or is not writable");
         }
+        this.strategy = strategy;
     }
 
     @Override

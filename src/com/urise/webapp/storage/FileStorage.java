@@ -2,8 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.strategies.ContextStrategy;
-import com.urise.webapp.strategies.ObjectStreamStrategy;
+import com.urise.webapp.strategies.Strategy;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,18 +11,19 @@ import java.util.Objects;
 
 public class FileStorage extends AbstractStorage<File> {
     private File dir;
+    private Strategy strategy;
 
-    ContextStrategy strategy = new ContextStrategy(new ObjectStreamStrategy());
-
-    public FileStorage(String directory) {
+    public FileStorage(String directory, Strategy strategy) {
         File checkDir = new File(directory);
         Objects.requireNonNull(checkDir, "directory must not be null");
+        Objects.requireNonNull(strategy, "strategy must not be null");
         if (!checkDir.isDirectory()) {
             throw new IllegalArgumentException(checkDir.getAbsolutePath() + " is not directory");
         }
         if (!checkDir.canRead() || !checkDir.canWrite()) {
             throw new IllegalArgumentException(checkDir.getAbsolutePath() + " is not readable/writable");
         }
+        this.strategy = strategy;
         this.dir = checkDir;
     }
 

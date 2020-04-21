@@ -8,7 +8,7 @@ import java.io.OutputStream;
 
 public interface Strategy {
 
-    void write(Resume resume, OutputStream os) throws IOException;
+    void doWrite(Resume resume, OutputStream os) throws IOException;
 
-    Resume read(InputStream is) throws IOException;
+    Resume doRead(InputStream is) throws IOException;
 }

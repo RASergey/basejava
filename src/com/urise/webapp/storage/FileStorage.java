@@ -2,7 +2,7 @@ package com.urise.webapp.storage;
 
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
-import com.urise.webapp.strategies.Strategy;
+import com.urise.webapp.storage.serializer.StreamSerializer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,20 +11,19 @@ import java.util.Objects;
 
 public class FileStorage extends AbstractStorage<File> {
     private File dir;
-    private Strategy strategy;
+    private StreamSerializer streamSerializer;
 
-    public FileStorage(String directory, Strategy strategy) {
-        File checkDir = new File(directory);
-        Objects.requireNonNull(checkDir, "directory must not be null");
-        Objects.requireNonNull(strategy, "strategy must not be null");
-        if (!checkDir.isDirectory()) {
-            throw new IllegalArgumentException(checkDir.getAbsolutePath() + " is not directory");
+    public FileStorage(File directory, StreamSerializer streamSerializer) {
+        Objects.requireNonNull(directory, "directory must not be null");
+
+        this.streamSerializer = streamSerializer;
+        if (!directory.isDirectory()) {
+            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
         }
-        if (!checkDir.canRead() || !checkDir.canWrite()) {
-            throw new IllegalArgumentException(checkDir.getAbsolutePath() + " is not readable/writable");
+        if (!directory.canRead() || !directory.canWrite()) {
+            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
         }
-        this.strategy = strategy;
-        this.dir = checkDir;
+        this.dir = directory;
     }
 
     @Override
@@ -52,7 +51,7 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected void doUpdate(Resume resume, File file) {
         try {
-            strategy.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
+            streamSerializer.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error ", file.getName() + " not exist", e);
         }
@@ -61,7 +60,7 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected Resume doGet(File file) {
         try {
-            return strategy.doRead(new BufferedInputStream(new FileInputStream(file)));
+            return streamSerializer.doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO error ", file.getName() + " not exist", e);
         }
@@ -94,7 +93,7 @@ public class FileStorage extends AbstractStorage<File> {
     public int size() {
         String[] list = dir.list();
         if (list == null) {
-            throw new StorageException("directory is empty", dir.getName());
+            throw new StorageException("directory is empty");
         } else {
             return list.length;
         }
@@ -103,7 +102,7 @@ public class FileStorage extends AbstractStorage<File> {
     private File[] checkNonNull() {
         File[] listFiles = dir.listFiles();
         if (listFiles == null) {
-            throw new StorageException("directory must not be null", dir.getName());
+            throw new StorageException("directory must not be null");
         } else {
             return listFiles;
         }

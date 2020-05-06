@@ -2,6 +2,9 @@ package com.urise.webapp.model;
 
 import com.urise.webapp.model.section.Section;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
@@ -11,12 +14,18 @@ import java.util.UUID;
 /**
  * Initial resume class
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final String uuid;
-    private final String fullName;
+
+    private String uuid;
+    private String fullName;
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     protected final Map<SectionType, Section> sectionMap = new EnumMap<>(SectionType.class);
+
+    public Resume() {
+    }
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -37,14 +46,6 @@ public class Resume implements Serializable {
         return fullName;
     }
 
-    public String getContacts(ContactType type) {
-        return contacts.get(type);
-    }
-
-    public Object getSection(SectionType type) {
-        return sectionMap.get(type);
-    }
-
     public void addContacts(ContactType type, String contact) {
         contacts.put(type, contact);
     }
@@ -57,18 +58,16 @@ public class Resume implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Resume resume = (Resume) o;
-
-        if (!uuid.equals(resume.uuid)) return false;
-        return fullName.equals(resume.fullName);
+        return Objects.equals(uuid, resume.uuid) &&
+                Objects.equals(fullName, resume.fullName) &&
+                Objects.equals(contacts, resume.contacts) &&
+                Objects.equals(sectionMap, resume.sectionMap);
     }
 
     @Override
     public int hashCode() {
-        int result = uuid.hashCode();
-        result = 31 * result + fullName.hashCode();
-        return result;
+        return Objects.hash(uuid, fullName, contacts, sectionMap);
     }
 
     @Override

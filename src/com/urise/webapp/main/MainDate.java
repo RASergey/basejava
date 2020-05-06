@@ -25,10 +25,10 @@ public class MainDate {
         LocalDateTime ldt = LocalDateTime.of(ld, lt);
         System.out.println(ldt);
 
-        SimpleDateFormat sdt = new  SimpleDateFormat("dd/MM/YYYY");
+        SimpleDateFormat sdt = new  SimpleDateFormat("dd/MM/yyyy");
         System.out.println(sdt.format(date));
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println(dtf.format(ldt));
     }
 }

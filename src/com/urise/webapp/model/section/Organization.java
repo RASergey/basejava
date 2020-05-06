@@ -15,7 +15,7 @@ public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Link homePage;
-    private List<Position> positions = new ArrayList<>();
+    private final List<Position> positions;
 
     public Organization(String name, String url, Position... positions) {
         this(new Link(name, url), Arrays.asList(positions));
@@ -49,7 +49,7 @@ public class Organization implements Serializable {
         return "\n" + homePage + ", " + positions;
     }
 
-    public static class Position implements Serializable{
+    public static class Position implements Serializable {
         private static final long serialVersionUID = 1L;
 
         private final LocalDate startDate;
@@ -57,7 +57,7 @@ public class Organization implements Serializable {
         private final String title;
         private final String description;
 
-        public Position (int startYear, Month startMonth, String title, String description) {
+        public Position(int startYear, Month startMonth, String title, String description) {
             this(of(startYear, startMonth), NOW, title, description);
         }
 

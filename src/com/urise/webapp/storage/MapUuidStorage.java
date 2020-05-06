@@ -5,7 +5,7 @@ import com.urise.webapp.model.Resume;
 import java.util.*;
 
 public class MapUuidStorage extends AbstractStorage<String> {
-    private Map<String, Resume> map = new HashMap<>();
+    private final Map<String, Resume> map = new HashMap<>();
 
     @Override
     protected String getSearchKey(String uuid) {
@@ -18,7 +18,7 @@ public class MapUuidStorage extends AbstractStorage<String> {
     }
 
     @Override
-        protected void doUpdate(Resume resume, String key) {
+    protected void doUpdate(Resume resume, String key) {
         map.put(key, resume);
     }
 

@@ -19,7 +19,6 @@ public class ResumeTestData {
     public static final Resume RESUME_DUMMY = new Resume("Розенбум Деревянный");
 
     static {
-        RESUME_1.addContacts(ContactType.FULL_NAME, RESUME_1.getFullName());
         RESUME_1.addContacts(ContactType.EMAIL_ADDRESS, "gkislin@yandex.ru");
         RESUME_1.addContacts(ContactType.PHONE_NUMBER, "+7(921) 855-0482");
         RESUME_1.addContacts(ContactType.SKYPE, "grigory.kislin");
@@ -162,7 +161,6 @@ public class ResumeTestData {
     } // Resume 1
 
     static {
-        RESUME_2.addContacts(ContactType.FULL_NAME, RESUME_2.getFullName());
         RESUME_2.addContacts(ContactType.EMAIL_ADDRESS, "HumpbackedHorse@Fairytale.dom");
         RESUME_2.addContacts(ContactType.PHONE_NUMBER, "+7(222) 222-2222");
         RESUME_2.addContacts(ContactType.SKYPE, "Horse");
@@ -197,7 +195,6 @@ public class ResumeTestData {
     } // Resume 2
 
     static {
-        RESUME_3.addContacts(ContactType.FULL_NAME, RESUME_3.getFullName());
         RESUME_3.addContacts(ContactType.EMAIL_ADDRESS, "KarlsonAttic@Fairytale.dom");
         RESUME_3.addContacts(ContactType.PHONE_NUMBER, "+7(333) 333-3333");
         RESUME_3.addContacts(ContactType.SKYPE, "Karlson");
@@ -227,7 +224,6 @@ public class ResumeTestData {
     } // Resume 3
 
     static {
-        RESUME_4.addContacts(ContactType.FULL_NAME, RESUME_4.getFullName());
         RESUME_4.addContacts(ContactType.EMAIL_ADDRESS, "LeopoldCat@Fairytale.dom");
         RESUME_4.addContacts(ContactType.PHONE_NUMBER, "+7(444) 444-4444");
         RESUME_4.addContacts(ContactType.SKYPE, "Leopold");
@@ -255,7 +251,6 @@ public class ResumeTestData {
     } // Resume 4
 
     static {
-        RESUME_5.addContacts(ContactType.FULL_NAME, RESUME_5.getFullName());
         RESUME_5.addContacts(ContactType.EMAIL_ADDRESS, "BunRunner@Fairytale.dom");
         RESUME_5.addContacts(ContactType.PHONE_NUMBER, "+7(555) 555-5555");
         RESUME_5.addContacts(ContactType.SKYPE, "Runner");
@@ -283,7 +278,6 @@ public class ResumeTestData {
     } // Resume 5
 
     static {
-        RESUME_DUMMY.addContacts(ContactType.FULL_NAME, RESUME_DUMMY.getFullName());
         RESUME_DUMMY.addContacts(ContactType.EMAIL_ADDRESS, "RosenbaumWooden@Fairytale.dom");
         RESUME_DUMMY.addContacts(ContactType.PHONE_NUMBER, "+7(123) 456-7890");
         RESUME_DUMMY.addContacts(ContactType.SKYPE, "Wooden");

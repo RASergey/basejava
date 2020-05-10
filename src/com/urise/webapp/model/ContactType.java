@@ -1,7 +1,6 @@
 package com.urise.webapp.model;
 
 public enum ContactType {
-    FULL_NAME("Фамилия Имя"),
     EMAIL_ADDRESS("Эл.почта"),
     PHONE_NUMBER("Мобильный тел."),
     HOME_PHONE("Домашний тел."),
